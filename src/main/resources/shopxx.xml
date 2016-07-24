@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <shopxx> 
-	<setting name="siteName" value="SHOP++商城"/>  
-	<setting name="siteUrl" value="http://localhost:8080/shopxx"/>  
-	<setting name="logo" value="/shopxx/upload/image/logo.gif"/>  
+	<setting name="siteName" value="OnlineShop商城"/>
+	<setting name="siteUrl" value="http://localhost:8080/"/>
+	<setting name="logo" value="/upload/image/logo.gif"/>
 	<setting name="hotSearch" value="T恤,衬衫,西服,西裤,森马,七匹狼,梵希蔓,春夏新款,牛仔裤"/>  
 	<setting name="address" value="湖南长沙经济技术开发区"/>  
 	<setting name="phone" value="400-8888888"/>  
@@ -18,9 +18,9 @@
 	<setting name="mediumProductImageHeight" value="300"/>  
 	<setting name="thumbnailProductImageWidth" value="170"/>  
 	<setting name="thumbnailProductImageHeight" value="170"/>  
-	<setting name="defaultLargeProductImage" value="/shopxx/upload/image/default_large.jpg"/>  
-	<setting name="defaultMediumProductImage" value="/shopxx/upload/image/default_medium.jpg"/>  
-	<setting name="defaultThumbnailProductImage" value="/shopxx/upload/image/default_thumbnail.jpg"/>  
+	<setting name="defaultLargeProductImage" value="/upload/image/default_large.jpg"/>
+	<setting name="defaultMediumProductImage" value="/upload/image/default_medium.jpg"/>
+	<setting name="defaultThumbnailProductImage" value="/upload/image/default_thumbnail.jpg"/>
 	<setting name="watermarkAlpha" value="50"/>  
 	<setting name="watermarkImage" value="/upload/image/watermark.png"/>  
 	<setting name="watermarkPosition" value="bottomRight"/>  

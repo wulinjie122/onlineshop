@@ -7,40 +7,41 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="xx_navigation")
-public class Navigation
-  extends OrderEntity
-{
+public class Navigation extends OrderEntity implements Serializable {
+
   private static final long serialVersionUID = -7635757647887646795L;
-  private String IIIllIlI;
-  private Navigation.Position IIIllIll;
-  private String IIIlllII;
-  private Boolean IIIlllIl;
+  private String name;
+  private Navigation.Position position;
+  private String url;
+  private Boolean isBlankTarget;
   
   @NotEmpty
   @Length(max=200)
   @Column(nullable=false)
   public String getName()
   {
-    return this.IIIllIlI;
+    return this.name;
   }
   
   public void setName(String name)
   {
-    this.IIIllIlI = name;
+    this.name = name;
   }
   
   @NotNull
   @Column(nullable=false)
   public Navigation.Position getPosition()
   {
-    return this.IIIllIll;
+    return this.position;
   }
   
   public void setPosition(Navigation.Position position)
   {
-    this.IIIllIll = position;
+    this.position = position;
   }
   
   @NotEmpty
@@ -48,24 +49,24 @@ public class Navigation
   @Column(nullable=false)
   public String getUrl()
   {
-    return this.IIIlllII;
+    return this.url;
   }
   
   public void setUrl(String url)
   {
-    this.IIIlllII = url;
+    this.url = url;
   }
   
   @NotNull
   @Column(nullable=false)
   public Boolean getIsBlankTarget()
   {
-    return this.IIIlllIl;
+    return this.isBlankTarget;
   }
   
   public void setIsBlankTarget(Boolean isBlankTarget)
   {
-    this.IIIlllIl = isBlankTarget;
+    this.isBlankTarget = isBlankTarget;
   }
   
   public enum Position

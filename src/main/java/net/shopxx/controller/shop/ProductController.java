@@ -31,9 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller("shopProductController")
 @RequestMapping({"/product"})
-public class ProductController
-  extends BaseController
-{
+public class ProductController extends BaseController {
   @Resource(name="productServiceImpl")
   private ProductService productService;
   @Resource(name="productCategoryServiceImpl")
@@ -150,10 +148,15 @@ public class ProductController
   {
     return Long.valueOf(this.productService.viewHits(id));
   }
+
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.shop.ProductController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.shop.ProductController
+
+ * JD-Core Version:    0.7.0.1
+
  */
