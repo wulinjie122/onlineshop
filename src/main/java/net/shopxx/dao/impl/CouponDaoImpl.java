@@ -1,10 +1,8 @@
 package net.shopxx.dao.impl;
 
 import java.util.Date;
-import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import net.shopxx.Page;
@@ -39,12 +37,16 @@ public class CouponDaoImpl
       }
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.CouponDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.CouponDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

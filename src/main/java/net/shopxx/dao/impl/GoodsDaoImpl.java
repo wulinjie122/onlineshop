@@ -55,13 +55,13 @@ public class GoodsDaoImpl extends BaseDaoImpl<Goods, Long> implements GoodsDao {
 					String str;
 					if (!localProduct.getIsGift().booleanValue()) {
 						str = "delete from GiftItem giftItem where giftItem.gift = :product";
-						// this.IIIllIlI.createQuery(str).setFlushMode(FlushModeType.COMMIT).setParameter("product",
+						// this.entityManager.createQuery(str).setFlushMode(FlushModeType.COMMIT).setParameter("product",
 						// localProduct).executeUpdate();
 					}
 					if ((!localProduct.getIsMarketable().booleanValue())
 							|| (localProduct.getIsGift().booleanValue())) {
 						str = "delete from CartItem cartItem where cartItem.product = :product";
-						// this.IIIllIlI.createQuery(str).setFlushMode(FlushModeType.COMMIT).setParameter("product",
+						// this.entityManager.createQuery(str).setFlushMode(FlushModeType.COMMIT).setParameter("product",
 						// localProduct).executeUpdate();
 					}
 				}

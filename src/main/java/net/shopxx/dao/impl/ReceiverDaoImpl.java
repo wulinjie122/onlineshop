@@ -1,10 +1,7 @@
 package net.shopxx.dao.impl;
 
-import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -52,7 +49,7 @@ public class ReceiverDaoImpl
     if (member != null) {
       localCriteriaQuery.where(localCriteriaBuilder.equal(localRoot.get("member"), member));
     }
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public void persist(Receiver receiver)
@@ -80,8 +77,12 @@ public class ReceiverDaoImpl
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.ReceiverDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.ReceiverDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

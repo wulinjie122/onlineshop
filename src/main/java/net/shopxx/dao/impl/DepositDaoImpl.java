@@ -1,7 +1,6 @@
 package net.shopxx.dao.impl;
 
 import java.util.Collections;
-import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -27,12 +26,16 @@ public class DepositDaoImpl
     Root localRoot = localCriteriaQuery.from(Deposit.class);
     localCriteriaQuery.select(localRoot);
     localCriteriaQuery.where(localCriteriaBuilder.equal(localRoot.get("member"), member));
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.DepositDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.DepositDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

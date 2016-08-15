@@ -25,10 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Service("articleServiceImpl")
-public class ArticleServiceImpl
-  extends BaseServiceImpl<Article, Long>
-  implements ArticleService, DisposableBean
-{
+public class ArticleServiceImpl extends BaseServiceImpl<Article, Long> implements ArticleService, DisposableBean {
   private long IIIllIlI = System.currentTimeMillis();
   @Resource(name="ehCacheManager")
   private CacheManager IIIllIll;
@@ -174,8 +171,12 @@ public class ArticleServiceImpl
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.service.impl.ArticleServiceImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.service.impl.ArticleServiceImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

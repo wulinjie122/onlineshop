@@ -1,9 +1,7 @@
 package net.shopxx.dao.impl;
 
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -16,7 +14,6 @@ import net.shopxx.dao.ReviewDao;
 import net.shopxx.entity.Member;
 import net.shopxx.entity.Product;
 import net.shopxx.entity.Review;
-import net.shopxx.entity.Review.Type;
 import org.springframework.stereotype.Repository;
 
 @Repository("reviewDaoImpl")
@@ -48,7 +45,7 @@ public class ReviewDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("isShow"), isShow));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, null, count, filters, orders);
+    return super.findList(localCriteriaQuery, null, count, filters, orders);
   }
   
   public Page<Review> findPage(Member member, Product product, Review.Type type, Boolean isShow, Pageable pageable)
@@ -75,7 +72,7 @@ public class ReviewDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("isShow"), isShow));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Long count(Member member, Product product, Review.Type type, Boolean isShow)
@@ -102,8 +99,8 @@ public class ReviewDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("isShow"), isShow));
     }
     localCriteriaQuery.where(localPredicate);
-    //ÁÙÊ±ÐÞ¸Ä wulinjie
-    //return super.IIIllIlI(localCriteriaQuery, null);
+    //ï¿½ï¿½Ê±ï¿½Þ¸ï¿½ wulinjie
+    //return super.entityManager(localCriteriaQuery, null);
     return null;
   }
   
@@ -137,8 +134,12 @@ public class ReviewDaoImpl
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.ReviewDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.ReviewDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

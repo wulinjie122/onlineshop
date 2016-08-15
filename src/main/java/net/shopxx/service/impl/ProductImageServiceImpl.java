@@ -123,8 +123,8 @@ public class ProductImageServiceImpl
 	  public void run(){
 		  //last modify by linjie.wu
 		  /*
-		  Collections.sort(ProductImageServiceImpl.IIIllIlI(this.productImageServiceImpl));
-		  Iterator localIterator = ProductImageServiceImpl.IIIllIlI(this.productImageServiceImpl).iterator();
+		  Collections.sort(ProductImageServiceImpl.entityManager(this.productImageServiceImpl));
+		  Iterator localIterator = ProductImageServiceImpl.entityManager(this.productImageServiceImpl).iterator();
 		  while (localIterator.hasNext()){
 			  StoragePlugin localStoragePlugin = (StoragePlugin)localIterator.next();
 			  if (localStoragePlugin.getIsEnabled()){

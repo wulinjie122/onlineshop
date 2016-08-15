@@ -5,20 +5,19 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-public class Order
-  implements Serializable
-{
+public class Order implements Serializable {
+
   private static final long serialVersionUID = -3078342809727773232L;
-  private static final Order.Direction IIIllIlI = Order.Direction.desc;
-  private String IIIllIll;
-  private Order.Direction IIIlllII = IIIllIlI;
+  private static final Order.Direction DIRECTION = Order.Direction.desc;
+  private String property;
+  private Order.Direction direction = DIRECTION;
   
   public Order() {}
   
   public Order(String property, Order.Direction direction)
   {
-    this.IIIllIll = property;
-    this.IIIlllII = direction;
+    this.property = property;
+    this.direction = direction;
   }
   
   public static Order asc(String property)
@@ -33,22 +32,22 @@ public class Order
   
   public String getProperty()
   {
-    return this.IIIllIll;
+    return this.property;
   }
   
   public void setProperty(String property)
   {
-    this.IIIllIll = property;
+    this.property = property;
   }
   
   public Order.Direction getDirection()
   {
-    return this.IIIlllII;
+    return this.direction;
   }
   
   public void setDirection(Order.Direction direction)
   {
-    this.IIIlllII = direction;
+    this.direction = direction;
   }
   
   public boolean equals(Object obj)

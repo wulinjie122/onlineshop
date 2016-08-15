@@ -1,7 +1,6 @@
 package net.shopxx.dao.impl;
 
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -39,7 +38,7 @@ public class ConsultationDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("isShow"), isShow));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, null, count, filters, orders);
+    return super.findList(localCriteriaQuery, null, count, filters, orders);
   }
   
   public Page<Consultation> findPage(Member member, Product product, Boolean isShow, Pageable pageable)
@@ -60,7 +59,7 @@ public class ConsultationDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("isShow"), isShow));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Long count(Member member, Product product, Boolean isShow)
@@ -81,6 +80,6 @@ public class ConsultationDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("isShow"), isShow));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, (List)null);
+    return super.findList(localCriteriaQuery, (List)null);
   }
 }

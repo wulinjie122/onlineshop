@@ -7,7 +7,7 @@ import net.shopxx.util.CookieUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class TokenInterceptor extends HandlerInterceptorAdapter {
-	//private static final String IIIllIlI = "token";
+	//private static final String entityManager = "token";
 	//private static final String IIIllIll = "token";
 	//private static final String IIIlllII = "token";
 	private static final String ERR_MSG = "Bad or missing token!";

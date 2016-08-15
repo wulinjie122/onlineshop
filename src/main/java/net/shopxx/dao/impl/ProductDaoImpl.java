@@ -6,20 +6,12 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.FlushModeType;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Selection;
 
 import net.shopxx.Filter;
 import net.shopxx.Page;
@@ -32,19 +24,12 @@ import net.shopxx.entity.Attribute;
 import net.shopxx.entity.Brand;
 import net.shopxx.entity.Goods;
 import net.shopxx.entity.Member;
-import net.shopxx.entity.Order;
-import net.shopxx.entity.Order.OrderStatus;
-import net.shopxx.entity.Order.PaymentStatus;
 import net.shopxx.entity.Product;
-import net.shopxx.entity.Product.OrderType;
 import net.shopxx.entity.ProductCategory;
 import net.shopxx.entity.Promotion;
-import net.shopxx.entity.Sn;
-import net.shopxx.entity.SpecificationValue;
 import net.shopxx.entity.Tag;
 import net.shopxx.util.SettingUtils;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -63,7 +48,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 			return false;
 		}
 		String str = "select count(*) from Product product where lower(product.sn) = lower(:sn)";
-		Long localLong = (Long) this.IIIllIlI.createQuery(str, Long.class)
+		Long localLong = (Long) this.entityManager.createQuery(str, Long.class)
 				.setFlushMode(FlushModeType.COMMIT).setParameter("sn", sn)
 				.getSingleResult();
 		return localLong.longValue() > 0L;
@@ -78,7 +63,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		}
 		String str = "select product from Product product where lower(product.sn) = lower(:sn)";
 		try {
-			return (Product) this.IIIllIlI.createQuery(str, Product.class)
+			return (Product) this.entityManager.createQuery(str, Product.class)
 					.setFlushMode(FlushModeType.COMMIT).setParameter("sn", sn)
 					.getSingleResult();
 		} catch (NoResultException localNoResultException) {
@@ -92,7 +77,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		if (StringUtils.isEmpty(keyword)) {
 			return Collections.emptyList();
 		}
-		CriteriaBuilder localCriteriaBuilder = this.IIIllIlI
+		CriteriaBuilder localCriteriaBuilder = this.entityManager
 				.getCriteriaBuilder();
 		CriteriaQuery localCriteriaQuery = localCriteriaBuilder
 				.createQuery(Product.class);
@@ -126,7 +111,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		localCriteriaQuery
 				.orderBy(new javax.persistence.criteria.Order[] { localCriteriaBuilder
 						.desc(localRoot.get("isTop")) });
-		return super.IIIllIlI(localCriteriaQuery, null, count, null, null);
+		return super.entityManager(localCriteriaQuery, null, count, null, null);
 		*/
 		return null;
 	}
@@ -139,7 +124,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 			Boolean isStockAlert, Product.OrderType orderType, Integer count,
 			List<Filter> filters, List<net.shopxx.Order> orders) {
 		/*
-		CriteriaBuilder localCriteriaBuilder = this.IIIllIlI.getCriteriaBuilder();
+		CriteriaBuilder localCriteriaBuilder = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery localCriteriaQuery = localCriteriaBuilder
 				.createQuery(Product.class);
 		Root localRoot = localCriteriaQuery.from(Product.class);
@@ -302,7 +287,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 			orders.add(net.shopxx.Order.desc("isTop"));
 			orders.add(net.shopxx.Order.desc("modifyDate"));
 		}
-		return super.IIIllIlI(localCriteriaQuery, null, count, filters, orders);
+		return super.entityManager(localCriteriaQuery, null, count, filters, orders);
 		*/
 		return null;
 	}
@@ -310,7 +295,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 	public List<Product> findList(ProductCategory productCategory,
 			Date beginDate, Date endDate, Integer first, Integer count) {
 		/*
-		CriteriaBuilder localCriteriaBuilder = this.IIIllIlI
+		CriteriaBuilder localCriteriaBuilder = this.entityManager
 				.getCriteriaBuilder();
 		CriteriaQuery localCriteriaQuery = localCriteriaBuilder
 				.createQuery(Product.class);
@@ -347,11 +332,11 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		localCriteriaQuery
 				.orderBy(new javax.persistence.criteria.Order[] { localCriteriaBuilder
 						.desc(localRoot.get("isTop")) });
-		return super.IIIllIlI(localCriteriaQuery, first, count, null, null);
+		return super.entityManager(localCriteriaQuery, first, count, null, null);
 	}
 
 	public List<Product> findList(Goods goods, Set<Product> excludes) {
-		CriteriaBuilder localCriteriaBuilder = this.IIIllIlI
+		CriteriaBuilder localCriteriaBuilder = this.entityManager
 				.getCriteriaBuilder();
 		CriteriaQuery localCriteriaQuery = localCriteriaBuilder
 				.createQuery(Product.class);
@@ -367,52 +352,50 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 					localCriteriaBuilder.not(localRoot.in(excludes)));
 		}
 		localCriteriaQuery.where(localPredicate);
-		return this.IIIllIlI.createQuery(localCriteriaQuery)
+		return this.entityManager.createQuery(localCriteriaQuery)
 				.setFlushMode(FlushModeType.COMMIT).getResultList();
 		*/
 		return null;
 	}
 
-	public Page<Product> findPage(ProductCategory productCategory, Brand brand,
-			Promotion promotion, List<Tag> tags,
-			Map<Attribute, String> attributeValue, BigDecimal startPrice,
-			BigDecimal endPrice, Boolean isMarketable, Boolean isList,
+	public Page<Product> findPage(ProductCategory productCategory, Brand brand, Promotion promotion, List<Tag> tags,
+			Map<Attribute, String> attributeValue, BigDecimal startPrice, BigDecimal endPrice, Boolean isMarketable, Boolean isList,
 			Boolean isTop, Boolean isGift, Boolean isOutOfStock,
 			Boolean isStockAlert, Product.OrderType orderType, Pageable pageable) {
-		CriteriaBuilder criteriabuilder = this.entityManager.getCriteriaBuilder();
-		CriteriaQuery criteriaquery = criteriabuilder.createQuery(Product.class);
-		Root root = criteriaquery.from(Product.class);
-		criteriaquery.select(root);
-		Predicate predicate = criteriabuilder.conjunction();
+
+		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery query = builder.createQuery(Product.class);
+		Root root = query.from(Product.class);
+		query.select(root);
+		Predicate predicate = builder.conjunction();
+
+		//产品类别
 		if (productCategory != null) {
-			predicate = criteriabuilder
-					.and(predicate, criteriabuilder.or(
-							criteriabuilder.equal(
-									root.get("productCategory"),
-									productCategory), criteriabuilder
-									.like(root.get("productCategory").get(
-											"treePath"),
-											"%," + productCategory.getId()
-													+ "," + "%")));
+			predicate = builder
+					.and(predicate, builder.or(
+							builder.equal(root.get("productCategory"), productCategory),
+							builder.like(root.get("productCategory").get("treePath"), "%," + productCategory.getId() + "," + "%")));
 		}
+
+		//品牌
 		if (brand != null) {
-			predicate = criteriabuilder.and(predicate,
-					criteriabuilder.equal(root.get("brand"), brand));
+			predicate = builder.and(predicate, builder.equal(root.get("brand"), brand));
 		}
+
 		if (promotion != null) {
-			predicate = criteriabuilder
-					.and(predicate, criteriabuilder
+			predicate = builder
+					.and(predicate, builder
 							.or(new Predicate[] {
-									criteriabuilder.equal(root.join(
+									builder.equal(root.join(
 											"promotions", JoinType.LEFT),
 											promotion),
-									criteriabuilder.equal(
+									builder.equal(
 											root.join("productCategory",
 													JoinType.LEFT)
 													.join("promotions",
 															JoinType.LEFT),
 											promotion),
-									criteriabuilder.equal(
+									builder.equal(
 											root.join("brand",
 													JoinType.LEFT)
 													.join("promotions",
@@ -420,9 +403,8 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 											promotion) }));
 		}
 		if ((tags != null) && (!tags.isEmpty())) {
-			predicate = criteriabuilder.and(predicate, root
-					.join("tags").in(tags));
-			criteriaquery.distinct(true);
+			predicate = builder.and(predicate, root.join("tags").in(tags));
+			query.distinct(true);
 		}
 		if (attributeValue != null) {
 			Iterator localObject2 = attributeValue.entrySet().iterator();
@@ -431,8 +413,8 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 				String localObject3 = "attributeValue"
 						+ ((Attribute) ((Map.Entry) localObject1).getKey())
 								.getPropertyIndex();
-				predicate = criteriabuilder.and(predicate,
-						criteriabuilder.equal(
+				predicate = builder.and(predicate,
+						builder.equal(
 								root.get((String) localObject3),
 								((Map.Entry) localObject1).getValue()));
 			}
@@ -444,49 +426,49 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		}
 		if ((startPrice != null)
 				&& (startPrice.compareTo(new BigDecimal(0)) >= 0)) {
-			predicate = criteriabuilder
-					.and(predicate, criteriabuilder.ge(
+			predicate = builder
+					.and(predicate, builder.ge(
 							root.get("price"), startPrice));
 		}
 		if ((endPrice != null) && (endPrice.compareTo(new BigDecimal(0)) >= 0)) {
-			predicate = criteriabuilder.and(predicate,
-					criteriabuilder.le(root.get("price"), endPrice));
+			predicate = builder.and(predicate,
+					builder.le(root.get("price"), endPrice));
 		}
 		if (isMarketable != null) {
-			predicate = criteriabuilder.and(predicate,
-					criteriabuilder.equal(root.get("isMarketable"),
+			predicate = builder.and(predicate,
+					builder.equal(root.get("isMarketable"),
 							isMarketable));
 		}
 		if (isList != null) {
-			predicate = criteriabuilder
-					.and(predicate, criteriabuilder.equal(
+			predicate = builder
+					.and(predicate, builder.equal(
 							root.get("isList"), isList));
 		}
 		if (isTop != null) {
-			predicate = criteriabuilder.and(predicate,
-					criteriabuilder.equal(root.get("isTop"), isTop));
+			predicate = builder.and(predicate,
+					builder.equal(root.get("isTop"), isTop));
 		}
 		if (isGift != null) {
-			predicate = criteriabuilder
-					.and(predicate, criteriabuilder.equal(
+			predicate = builder
+					.and(predicate, builder.equal(
 							root.get("isGift"), isGift));
 		}
 		Object localObject1 = root.get("stock");
 		Object localObject2 = root.get("allocatedStock");
 		if (isOutOfStock != null) {
 			if (isOutOfStock.booleanValue()) {
-				predicate = criteriabuilder.and(new Predicate[] {
+				predicate = builder.and(new Predicate[] {
 						predicate,
-						criteriabuilder
+						builder
 								.isNotNull((Expression) localObject1),
-						criteriabuilder.lessThanOrEqualTo(
+						builder.lessThanOrEqualTo(
 								(Expression) localObject1,
 								(Expression) localObject2) });
 			} else {
-				predicate = criteriabuilder.and(predicate,
-						criteriabuilder.or(criteriabuilder
+				predicate = builder.and(predicate,
+						builder.or(builder
 								.isNull((Expression) localObject1),
-								criteriabuilder.greaterThan(
+								builder.greaterThan(
 										(Expression) localObject1,
 										(Expression) localObject2)));
 			}
@@ -494,33 +476,33 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		if (isStockAlert != null) {
 			Setting setttings = SettingUtils.get();
 			if (isStockAlert.booleanValue()) {
-				predicate = criteriabuilder
+				predicate = builder
 						.and(new Predicate[] {
 								predicate,
-								criteriabuilder
+								builder
 										.isNotNull((Expression) localObject1),
-								criteriabuilder.lessThanOrEqualTo(
+								builder.lessThanOrEqualTo(
 										(Expression) localObject1,
-										criteriabuilder.sum(
+										builder.sum(
 												(Expression) localObject2,
 												((Setting) setttings)
 														.getStockAlertCount())) });
 			} else {
-				predicate = criteriabuilder
+				predicate = builder
 						.and(predicate,
-								criteriabuilder.or(
-										criteriabuilder
+								builder.or(
+										builder
 												.isNull((Expression) localObject1),
-										criteriabuilder
+										builder
 												.greaterThan(
 														(Expression) localObject1,
-														criteriabuilder
+														builder
 																.sum((Expression) localObject2,
 																		((Setting) setttings)
 																				.getStockAlertCount()))));
 			}
 		}
-		criteriaquery.where(predicate);
+		query.where(predicate);
 		Object localObject3 = pageable.getOrders();
 		if (orderType == Product.OrderType.priceAsc) {
 			((List) localObject3).add(net.shopxx.Order.asc("price"));
@@ -540,7 +522,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 			((List) localObject3).add(net.shopxx.Order.desc("isTop"));
 			((List) localObject3).add(net.shopxx.Order.desc("modifyDate"));
 		}
-		return super.IIIllIlI(criteriaquery, pageable);
+		return super.findList(query, pageable);
 	}
 
 	public Page<Product> findPage(Member member, Pageable pageable) {
@@ -548,7 +530,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		if (member == null) {
 			return new Page(Collections.emptyList(), 0L, pageable);
 		}
-		CriteriaBuilder localCriteriaBuilder = this.IIIllIlI
+		CriteriaBuilder localCriteriaBuilder = this.entityManager
 				.getCriteriaBuilder();
 		CriteriaQuery localCriteriaQuery = localCriteriaBuilder
 				.createQuery(Product.class);
@@ -556,7 +538,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		localCriteriaQuery.select(localRoot);
 		localCriteriaQuery.where(localCriteriaBuilder.equal(
 				localRoot.join("favoriteMembers"), member));
-		return super.IIIllIlI(localCriteriaQuery, pageable);
+		return super.entityManager(localCriteriaQuery, pageable);
 		*/
 		return null;
 	}
@@ -564,7 +546,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 	public Page<Object> findSalesPage(Date beginDate, Date endDate,
 			Pageable pageable) {
 		/*
-		CriteriaBuilder localCriteriaBuilder = this.IIIllIlI
+		CriteriaBuilder localCriteriaBuilder = this.entityManager
 				.getCriteriaBuilder();
 		CriteriaQuery localCriteriaQuery1 = localCriteriaBuilder
 				.createQuery(Object.class);
@@ -623,7 +605,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		localCriteriaQuery2.select(localCriteriaBuilder
 				.countDistinct(localRoot2));
 		localCriteriaQuery2.where(localPredicate2);
-		Long localLong = (Long) this.IIIllIlI.createQuery(localCriteriaQuery2)
+		Long localLong = (Long) this.entityManager.createQuery(localCriteriaQuery2)
 				.setFlushMode(FlushModeType.COMMIT).getSingleResult();
 		int i = (int) Math.ceil(localLong.longValue() / pageable.getPageSize());
 		if (i < pageable.getPageNumber()) {
@@ -634,7 +616,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 						.desc(localCriteriaBuilder.sum(localCriteriaBuilder
 								.prod(localJoin1.get("quantity"),
 										localJoin1.get("price")))) });
-		TypedQuery localTypedQuery = this.IIIllIlI.createQuery(
+		TypedQuery localTypedQuery = this.entityManager.createQuery(
 				localCriteriaQuery1).setFlushMode(FlushModeType.COMMIT);
 		localTypedQuery.setFirstResult((pageable.getPageNumber() - 1)
 				* pageable.getPageSize());
@@ -649,7 +631,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 			Boolean isList, Boolean isTop, Boolean isGift,
 			Boolean isOutOfStock, Boolean isStockAlert) {
 		/*
-		CriteriaBuilder localCriteriaBuilder = this.IIIllIlI
+		CriteriaBuilder localCriteriaBuilder = this.entityManager
 				.getCriteriaBuilder();
 		CriteriaQuery localCriteriaQuery = localCriteriaBuilder
 				.createQuery(Product.class);
@@ -716,7 +698,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 			}
 		}
 		localCriteriaQuery.where(localPredicate);
-		return super.IIIllIlI(localCriteriaQuery, null);
+		return super.entityManager(localCriteriaQuery, null);
 		*/
 		return null;
 	}
@@ -727,7 +709,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 			return false;
 		}
 		String str = "select count(*) from OrderItem orderItem where orderItem.product = :product and orderItem.order.member = :member and orderItem.order.orderStatus = :orderStatus";
-		Long localLong = (Long) this.IIIllIlI.createQuery(str, Long.class)
+		Long localLong = (Long) this.entityManager.createQuery(str, Long.class)
 				.setFlushMode(FlushModeType.COMMIT)
 				.setParameter("product", product)
 				.setParameter("member", member)
@@ -750,16 +732,16 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		String str;
 		if (!product.getIsGift().booleanValue()) {
 			str = "delete from GiftItem giftItem where giftItem.gift = :product";
-			this.IIIllIlI.createQuery(str).setFlushMode(FlushModeType.COMMIT)
+			this.entityManager.createQuery(str).setFlushMode(FlushModeType.COMMIT)
 					.setParameter("product", product).executeUpdate();
 		}
 		if ((!product.getIsMarketable().booleanValue())
 				|| (product.getIsGift().booleanValue())) {
 			str = "delete from CartItem cartItem where cartItem.product = :product";
-			this.IIIllIlI.createQuery(str).setFlushMode(FlushModeType.COMMIT)
+			this.entityManager.createQuery(str).setFlushMode(FlushModeType.COMMIT)
 					.setParameter("product", product).executeUpdate();
 		}
-		IIIllIlI(product);
+		entityManager(product);
 		return (Product) super.merge(product);
 		*/
 		return null;

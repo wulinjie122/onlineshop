@@ -2,10 +2,8 @@ package net.shopxx.dao.impl;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import net.shopxx.Filter;
@@ -41,12 +39,16 @@ public class PromotionDaoImpl
       }
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, null, count, filters, orders);
+    return super.findList(localCriteriaQuery, null, count, filters, orders);
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.PromotionDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.PromotionDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

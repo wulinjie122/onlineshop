@@ -160,7 +160,7 @@ public class MailServiceImpl
   
 	  public void run(){
 		  //last modify by linjie.wu
-		  //MailServiceImpl.IIIllIlI(this.mimeMessage).send(mimeMessage);
+		  //MailServiceImpl.entityManager(this.mimeMessage).send(mimeMessage);
 	  }
   }
   

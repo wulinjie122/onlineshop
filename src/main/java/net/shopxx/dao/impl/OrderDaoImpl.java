@@ -5,15 +5,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import net.shopxx.Filter;
@@ -22,9 +18,6 @@ import net.shopxx.Pageable;
 import net.shopxx.dao.OrderDao;
 import net.shopxx.entity.Member;
 import net.shopxx.entity.Order;
-import net.shopxx.entity.Order.OrderStatus;
-import net.shopxx.entity.Order.PaymentStatus;
-import net.shopxx.entity.Order.ShippingStatus;
 import net.shopxx.entity.OrderItem;
 import net.shopxx.entity.Product;
 import org.springframework.stereotype.Repository;
@@ -56,7 +49,7 @@ public class OrderDaoImpl extends BaseDaoImpl<net.shopxx.entity.Order, Long> imp
     Root localRoot = localCriteriaQuery.from(net.shopxx.entity.Order.class);
     localCriteriaQuery.select(localRoot);
     localCriteriaQuery.where(localCriteriaBuilder.equal(localRoot.get("member"), member));
-    return super.IIIllIlI(localCriteriaQuery, null, count, filters, orders);
+    return super.findList(localCriteriaQuery, null, count, filters, orders);
   }
   
   public Page<net.shopxx.entity.Order> findPage(Member member, Pageable pageable)
@@ -69,7 +62,7 @@ public class OrderDaoImpl extends BaseDaoImpl<net.shopxx.entity.Order, Long> imp
     Root localRoot = localCriteriaQuery.from(net.shopxx.entity.Order.class);
     localCriteriaQuery.select(localRoot);
     localCriteriaQuery.where(localCriteriaBuilder.equal(localRoot.get("member"), member));
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Page<net.shopxx.entity.Order> findPage(Order.OrderStatus orderStatus, Order.PaymentStatus paymentStatus, Order.ShippingStatus shippingStatus, Boolean hasExpired, Pageable pageable)
@@ -96,7 +89,7 @@ public class OrderDaoImpl extends BaseDaoImpl<net.shopxx.entity.Order, Long> imp
       }
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Long count(Order.OrderStatus orderStatus, Order.PaymentStatus paymentStatus, Order.ShippingStatus shippingStatus, Boolean hasExpired)
@@ -123,8 +116,8 @@ public class OrderDaoImpl extends BaseDaoImpl<net.shopxx.entity.Order, Long> imp
       }
     }
     localCriteriaQuery.where(localPredicate);
-    //ÁÙÊ±ÐÞ¸Ä wulinjie
-    return super.IIIllIlI(localCriteriaQuery, (List)null);
+    //ï¿½ï¿½Ê±ï¿½Þ¸ï¿½ wulinjie
+    return super.findList(localCriteriaQuery, (List)null);
   }
   
   public Long waitingPaymentCount(Member member)
@@ -141,8 +134,8 @@ public class OrderDaoImpl extends BaseDaoImpl<net.shopxx.entity.Order, Long> imp
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("member"), member));
     }
     localCriteriaQuery.where(localPredicate);
-    //ÁÙÊ±ÐÞ¸Ä wulinjie
-    return super.IIIllIlI(localCriteriaQuery, (List)null);
+    //ï¿½ï¿½Ê±ï¿½Þ¸ï¿½ wulinjie
+    return super.findList(localCriteriaQuery, (List)null);
   }
   
   public Long waitingShippingCount(Member member)
@@ -158,8 +151,8 @@ public class OrderDaoImpl extends BaseDaoImpl<net.shopxx.entity.Order, Long> imp
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("member"), member));
     }
     localCriteriaQuery.where(localPredicate);
-    //ÁÙÊ±ÐÞ¸Ä wulinjie
-    return super.IIIllIlI(localCriteriaQuery, (List)null);
+    //ï¿½ï¿½Ê±ï¿½Þ¸ï¿½ wulinjie
+    return super.findList(localCriteriaQuery, (List)null);
   }
   
   public BigDecimal getSalesAmount(Date beginDate, Date endDate)
@@ -231,8 +224,12 @@ public class OrderDaoImpl extends BaseDaoImpl<net.shopxx.entity.Order, Long> imp
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.OrderDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.OrderDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

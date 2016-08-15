@@ -18,8 +18,8 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-public class BaseController
-{
+public class BaseController {
+
   protected static final String ERROR_PAGE = "/shop/common/error";
   protected static final Message MESSAGE_ERROR = Message.error("shop.message.error", new Object[0]);
   protected static final Message MESSAGE_SUCCESS = Message.success("shop.message.success", new Object[0]);
@@ -30,7 +30,6 @@ public class BaseController
   @InitBinder
   protected void bindingPreparation(WebDataBinder paramWebDataBinder)
   {
-	System.out.println("into binding...");
     paramWebDataBinder.registerCustomEditor(String.class, new HtmlCleanEditor(true, true));
     paramWebDataBinder.registerCustomEditor(Date.class, new DateEditor(true));
   }

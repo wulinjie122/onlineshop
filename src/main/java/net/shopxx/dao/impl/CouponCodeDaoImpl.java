@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -91,7 +89,7 @@ public class CouponCodeDaoImpl
     if (member != null) {
       localCriteriaQuery.where(localCriteriaBuilder.equal(localRoot.get("member"), member));
     }
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Long count(Coupon coupon, Member member, Boolean hasBegun, Boolean hasExpired, Boolean isUsed)
@@ -126,6 +124,6 @@ public class CouponCodeDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("isUsed"), isUsed));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, (List)null);
+    return super.findList(localCriteriaQuery, (List)null);
   }
 }

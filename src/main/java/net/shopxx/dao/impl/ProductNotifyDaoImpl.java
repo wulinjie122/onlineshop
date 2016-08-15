@@ -1,8 +1,6 @@
 package net.shopxx.dao.impl;
 
-import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -55,7 +53,7 @@ public class ProductNotifyDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("hasSent"), hasSent));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Long count(Member member, Boolean isMarketable, Boolean isOutOfStock, Boolean hasSent)
@@ -85,8 +83,8 @@ public class ProductNotifyDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.equal(localRoot.get("hasSent"), hasSent));
     }
     localCriteriaQuery.where(localPredicate);
-    //ÁÙÊ±ÐÞ¸Ä wulinjie
-    //return super.IIIllIlI(localCriteriaQuery, null);
+    //ï¿½ï¿½Ê±ï¿½Þ¸ï¿½ wulinjie
+    //return super.entityManager(localCriteriaQuery, null);
     return null;
   }
 }

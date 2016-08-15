@@ -22,17 +22,16 @@ import org.springframework.util.Assert;
 
 @Transactional
 public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<T, ID> {
+
   private static final String[] IIIllIlI = { "id", "createDate", "modifyDate" };
   private BaseDao<T, ID> baseDao;
   
-  public void setBaseDao(BaseDao<T, ID> baseDao)
-  {
+  public void setBaseDao(BaseDao<T, ID> baseDao) {
     this.baseDao = baseDao;
   }
   
   @Transactional(readOnly=true)
-  public T find(ID id)
-  {
+  public T find(ID id) {
     return this.baseDao.find(id);
   }
   
@@ -47,8 +46,7 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
   {
     ArrayList arraylist = new ArrayList();
     if (ids != null) {
-      for (ID id : ids)
-      {
+      for (ID id : ids) {
         Object obj = find(id);
         if (obj != null) {
           arraylist.add(obj);
@@ -125,7 +123,7 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
     Object localObject = this.IIIllIll.find(this.IIIllIll.getIdentifier(entity));
     if (localObject != null)
     {
-      IIIllIlI(entity, localObject, (String[])ArrayUtils.addAll(ignoreProperties, IIIllIlI));
+      entityManager(entity, localObject, (String[])ArrayUtils.addAll(ignoreProperties, entityManager));
       return update(localObject);
     }
     return update(entity);

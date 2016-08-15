@@ -102,20 +102,20 @@ public class ProductController extends BaseController {
   @RequestMapping(value={"/list"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
   public String list(Long brandId, Long promotionId, Long[] tagIds, BigDecimal startPrice, BigDecimal endPrice, Product.OrderType orderType, Integer pageNumber, Integer pageSize, HttpServletRequest request, ModelMap model)
   {
-    Brand localBrand = (Brand)this.brandService.find(brandId);
-    Promotion localPromotion = (Promotion)this.promotionService.find(promotionId);
-    List localList = this.tagService.findList(tagIds);
+    Brand brand = (Brand)this.brandService.find(brandId);
+    Promotion promotion = (Promotion)this.promotionService.find(promotionId);
+    List tags = this.tagService.findList(tagIds);
     Pageable localPageable = new Pageable(pageNumber, pageSize);
     model.addAttribute("orderTypes", Product.OrderType.values());
-    model.addAttribute("brand", localBrand);
-    model.addAttribute("promotion", localPromotion);
-    model.addAttribute("tags", localList);
+    model.addAttribute("brand", brand);
+    model.addAttribute("promotion", promotion);
+    model.addAttribute("tags", tags);
     model.addAttribute("startPrice", startPrice);
     model.addAttribute("endPrice", endPrice);
     model.addAttribute("orderType", orderType);
     model.addAttribute("pageNumber", pageNumber);
     model.addAttribute("pageSize", pageSize);
-    model.addAttribute("page", this.productService.findPage(null, localBrand, localPromotion, localList, null, startPrice, endPrice, Boolean.valueOf(true), Boolean.valueOf(true), null, Boolean.valueOf(false), null, null, orderType, localPageable));
+    model.addAttribute("page", this.productService.findPage(null, brand, promotion, tags, null, startPrice, endPrice, Boolean.valueOf(true), Boolean.valueOf(true), null, Boolean.valueOf(false), null, null, orderType, localPageable));
     return "/shop/product/list";
   }
   
@@ -150,13 +150,3 @@ public class ProductController extends BaseController {
   }
 
 }
-
-
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
-
- * Qualified Name:     net.shopxx.controller.shop.ProductController
-
- * JD-Core Version:    0.7.0.1
-
- */

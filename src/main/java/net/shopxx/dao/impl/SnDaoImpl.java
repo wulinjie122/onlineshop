@@ -117,8 +117,8 @@ public class SnDaoImpl implements SnDao, InitializingBean
     {
       if (this.IIIllllI > this.IIIlllIl)
       {
-    	 //ÁÙÊ±ÐÞ¸Ä wulinjie
-        //this.IIlIIIII = SnDaoImpl.IIIllIlI(this.IIIllIlI, this.IIIllIll);
+    	 //ï¿½ï¿½Ê±ï¿½Þ¸ï¿½ wulinjie
+        //this.IIlIIIII = SnDaoImpl.entityManager(this.entityManager, this.IIIllIll);
         this.IIIllllI = (this.IIlIIIII == 0L ? 1 : 0);
         this.IIIlllll = (this.IIlIIIII * (this.IIIlllIl + 1));
       }
@@ -128,8 +128,12 @@ public class SnDaoImpl implements SnDao, InitializingBean
   
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.SnDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.SnDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */

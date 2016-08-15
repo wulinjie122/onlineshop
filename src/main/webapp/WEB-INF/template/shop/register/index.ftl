@@ -49,7 +49,7 @@ $().ready(function() {
 	$registerForm.validate({
 		rules: {
 			username: {
-				required: true,
+				c: true,
 				pattern: /^[0-9a-z_A-Z\u4e00-\u9fa5]+$/,
 				minlength: ${setting.usernameMinLength},
 				remote: {

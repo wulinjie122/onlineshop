@@ -13,7 +13,6 @@ import net.shopxx.dao.ArticleDao;
 import net.shopxx.dao.ProductDao;
 import net.shopxx.entity.Article;
 import net.shopxx.entity.Product;
-import net.shopxx.entity.Product.OrderType;
 import net.shopxx.service.SearchService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.index.Term;
@@ -38,34 +37,31 @@ import org.wltea.analyzer.lucene.IKAnalyzer;
 
 @Service("searchServiceImpl")
 @Transactional
-public class SearchServiceImpl
-  implements SearchService
-{
+public class SearchServiceImpl implements SearchService {
+
   private static final float IIIllIll = 0.5F;
   @PersistenceContext
-  protected EntityManager IIIllIlI;
+  protected EntityManager entityManager;
   @Resource(name="articleDaoImpl")
-  private ArticleDao IIIlllII;
+  private ArticleDao articleDao;
   @Resource(name="productDaoImpl")
-  private ProductDao IIIlllIl;
+  private ProductDao productDao;
   
-  public void index()
-  {
+  public void index() {
     index(Article.class);
     index(Product.class);
   }
   
-  public void index(Class<?> type)
-  {
-    FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.IIIllIlI);
+  public void index(Class<?> type) {
+    FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
     int i;
     List localList;
     Iterator localIterator;
     Object localObject;
     if (type == Article.class) {
-      for (i = 0; i < this.IIIlllII.count(new Filter[0]); i += 20)
+      for (i = 0; i < this.articleDao.count(new Filter[0]); i += 20)
       {
-        localList = this.IIIlllII.findList(Integer.valueOf(i), Integer.valueOf(20), null, null);
+        localList = this.articleDao.findList(Integer.valueOf(i), Integer.valueOf(20), null, null);
         localIterator = localList.iterator();
         while (localIterator.hasNext())
         {
@@ -74,12 +70,12 @@ public class SearchServiceImpl
         }
         localFullTextEntityManager.flushToIndexes();
         localFullTextEntityManager.clear();
-        this.IIIlllII.clear();
+        this.articleDao.clear();
       }
     } else if (type == Product.class) {
-      for (i = 0; i < this.IIIlllIl.count(new Filter[0]); i += 20)
+      for (i = 0; i < this.productDao.count(new Filter[0]); i += 20)
       {
-        localList = this.IIIlllIl.findList(Integer.valueOf(i), Integer.valueOf(20), null, null);
+        localList = this.productDao.findList(Integer.valueOf(i), Integer.valueOf(20), null, null);
         localIterator = localList.iterator();
         while (localIterator.hasNext())
         {
@@ -88,7 +84,7 @@ public class SearchServiceImpl
         }
         localFullTextEntityManager.flushToIndexes();
         localFullTextEntityManager.clear();
-        this.IIIlllIl.clear();
+        this.productDao.clear();
       }
     }
   }
@@ -97,7 +93,7 @@ public class SearchServiceImpl
   {
     if (article != null)
     {
-      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.IIIllIlI);
+      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
       localFullTextEntityManager.index(article);
     }
   }
@@ -106,7 +102,7 @@ public class SearchServiceImpl
   {
     if (product != null)
     {
-      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.IIIllIlI);
+      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
       localFullTextEntityManager.index(product);
     }
   }
@@ -119,7 +115,7 @@ public class SearchServiceImpl
   
   public void purge(Class<?> type)
   {
-    FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.IIIllIlI);
+    FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
     if (type == Article.class) {
       localFullTextEntityManager.purgeAll(Article.class);
     } else if (type == Product.class) {
@@ -131,7 +127,7 @@ public class SearchServiceImpl
   {
     if (article != null)
     {
-      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.IIIllIlI);
+      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
       localFullTextEntityManager.purge(Article.class, article.getId());
     }
   }
@@ -140,7 +136,7 @@ public class SearchServiceImpl
   {
     if (product != null)
     {
-      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.IIIllIlI);
+      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
       localFullTextEntityManager.purge(Product.class, product.getId());
     }
   }
@@ -170,7 +166,7 @@ public class SearchServiceImpl
       localBooleanQuery1.add(localTermQuery1, BooleanClause.Occur.SHOULD);
       localBooleanQuery2.add(localTermQuery2, BooleanClause.Occur.MUST);
       localBooleanQuery2.add(localBooleanQuery1, BooleanClause.Occur.MUST);
-      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.IIIllIlI);
+      FullTextEntityManager localFullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
       FullTextQuery localFullTextQuery = localFullTextEntityManager.createFullTextQuery(localBooleanQuery2, new Class[] { Article.class });
       localFullTextQuery.setSort(new Sort(new SortField[] { new SortField("isTop", 3, true), new SortField(null, 0), new SortField("createDate", 6, true) }));
       localFullTextQuery.setFirstResult((pageable.getPageNumber() - 1) * pageable.getPageSize());
@@ -238,7 +234,7 @@ public class SearchServiceImpl
     	 NumericRangeQuery numericrangequery2 = NumericRangeQuery.newDoubleRange("price", null, Double.valueOf(endPrice.doubleValue()), false, true);
         localBooleanQuery2.add((Query)numericrangequery2, BooleanClause.Occur.MUST);
       }
-      Object localObject = Search.getFullTextEntityManager(this.IIIllIlI);
+      Object localObject = Search.getFullTextEntityManager(this.entityManager);
       FullTextQuery localFullTextQuery = ((FullTextEntityManager)localObject).createFullTextQuery(localBooleanQuery2, new Class[] { Product.class });
       SortField[] arrayOfSortField = null;
       if (orderType == Product.OrderType.priceAsc) {
@@ -265,10 +261,5 @@ public class SearchServiceImpl
     }
     return new Page();
   }
-}
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.service.impl.SearchServiceImpl
- * JD-Core Version:    0.7.0.1
- */
+}

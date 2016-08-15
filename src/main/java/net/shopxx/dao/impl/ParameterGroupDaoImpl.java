@@ -31,14 +31,14 @@ public class ParameterGroupDaoImpl extends BaseDaoImpl<ParameterGroup, Long> imp
 		/*
 		Assert.notNull(parameterGroup);
 		HashSet localHashSet = new HashSet();
-		// ÁÙÊ±ÐÞ¸Ä
+		// ï¿½ï¿½Ê±ï¿½Þ¸ï¿½
 		// CollectionUtils.select(parameterGroup.getParameters(), new
 		// ParameterGroupDaoImpl.1(this), localHashSet);
 		List localList1 = this.IIIllIll.findList(parameterGroup, localHashSet);
 		for (int i = 0; i < localList1.size(); i++) {
 			Parameter localParameter = (Parameter) localList1.get(i);
 			String str = "select product from Product product join product.parameterValue parameterValue where index(parameterValue) = :parameter";
-			List localList2 = this.IIIllIlI.createQuery(str, Product.class).setFlushMode(FlushModeType.COMMIT)
+			List localList2 = this.entityManager.createQuery(str, Product.class).setFlushMode(FlushModeType.COMMIT)
 					.setParameter("parameter", localParameter).getResultList();
 			Iterator localIterator = localList2.iterator();
 			while (localIterator.hasNext()) {
@@ -62,7 +62,7 @@ public class ParameterGroupDaoImpl extends BaseDaoImpl<ParameterGroup, Long> imp
 				Parameter localParameter = (Parameter) parameterGroup
 						.getParameters().get(i);
 				String str = "select product from Product product join product.parameterValue parameterValue where index(parameterValue) = :parameter";
-				List localList = this.IIIllIlI.createQuery(str, Product.class)
+				List localList = this.entityManager.createQuery(str, Product.class)
 						.setFlushMode(FlushModeType.COMMIT)
 						.setParameter("parameter", localParameter)
 						.getResultList();
@@ -82,7 +82,7 @@ public class ParameterGroupDaoImpl extends BaseDaoImpl<ParameterGroup, Long> imp
 	}
 
 	/**
-	 * ÁÙÊ±ÐÞ¸Ä
+	 * ï¿½ï¿½Ê±ï¿½Þ¸ï¿½
 	 * @author wulinjie
 	 */
 	class P1 implements Predicate {

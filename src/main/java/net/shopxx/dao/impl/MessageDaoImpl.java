@@ -2,7 +2,6 @@ package net.shopxx.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -35,7 +34,7 @@ public class MessageDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.or(localCriteriaBuilder.and(localCriteriaBuilder.isNull(localRoot.get("sender")), localCriteriaBuilder.equal(localRoot.get("senderDelete"), Boolean.valueOf(false))), localCriteriaBuilder.and(localCriteriaBuilder.isNull(localRoot.get("receiver")), localCriteriaBuilder.equal(localRoot.get("receiverDelete"), Boolean.valueOf(false)))));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Page<Message> findDraftPage(Member sender, Pageable pageable)
@@ -52,7 +51,7 @@ public class MessageDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.isNull(localRoot.get("sender")));
     }
     localCriteriaQuery.where(localPredicate);
-    return super.IIIllIlI(localCriteriaQuery, pageable);
+    return super.findList(localCriteriaQuery, pageable);
   }
   
   public Long count(Member member, Boolean read)
@@ -77,8 +76,8 @@ public class MessageDaoImpl
       localPredicate = localCriteriaBuilder.and(localPredicate, localCriteriaBuilder.or(localCriteriaBuilder.and(localCriteriaBuilder.isNull(localRoot.get("sender")), localCriteriaBuilder.equal(localRoot.get("senderDelete"), Boolean.valueOf(false))), localCriteriaBuilder.and(localCriteriaBuilder.isNull(localRoot.get("receiver")), localCriteriaBuilder.equal(localRoot.get("receiverDelete"), Boolean.valueOf(false)))));
     }
     localCriteriaQuery.where(localPredicate);
-    //ÁÙÊ±ÐÞ¸Ä£¬±àÒë´íÎó wulinjie
-    return super.IIIllIlI(localCriteriaQuery, (List)null);
+    //ï¿½ï¿½Ê±ï¿½Þ¸Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ wulinjie
+    return super.findList(localCriteriaQuery, (List)null);
   }
   
   public void remove(Long id, Member member)
@@ -119,8 +118,12 @@ public class MessageDaoImpl
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.dao.impl.MessageDaoImpl
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.dao.impl.MessageDaoImpl
+
+ * JD-Core Version:    0.7.0.1
+
  */
