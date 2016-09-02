@@ -31,13 +31,17 @@ public class SitemapController
   public String build(RedirectAttributes redirectAttributes)
   {
     this.IIIllllI.buildSitemap();
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:build.jhtml";
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.SitemapController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.SitemapController
+
+ * JD-Core Version:    0.7.0.1
+
  */

@@ -58,13 +58,17 @@ public class PasswordController
     }
     localMember.setPassword(DigestUtils.md5Hex(password));
     this.IIIlllIl.update(localMember);
-    IIIllIlI(redirectAttributes, MESSAGE_SUCCESS);
+    getMessage(redirectAttributes, MESSAGE_SUCCESS);
     return "redirect:edit.jhtml";
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.shop.member.PasswordController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.shop.member.PasswordController
+
+ * JD-Core Version:    0.7.0.1
+
  */

@@ -31,7 +31,7 @@ public class FtpController
       localPluginConfig.setIsEnabled(Boolean.valueOf(false));
       this.IIIllllI.save(localPluginConfig);
     }
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:/admin/storage_plugin/list.jhtml";
   }
   
@@ -43,7 +43,7 @@ public class FtpController
       PluginConfig localPluginConfig = this.IIIlllIl.getPluginConfig();
       this.IIIllllI.delete(localPluginConfig);
     }
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:/admin/storage_plugin/list.jhtml";
   }
   
@@ -67,13 +67,17 @@ public class FtpController
     localPluginConfig.setIsEnabled(isEnabled);
     localPluginConfig.setOrder(order);
     this.IIIllllI.update(localPluginConfig);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:/admin/storage_plugin/list.jhtml";
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.plugin.ftp.FtpController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.plugin.ftp.FtpController
+
+ * JD-Core Version:    0.7.0.1
+
  */

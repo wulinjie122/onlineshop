@@ -19,28 +19,28 @@ import org.springframework.stereotype.Service;
 @Service("pluginServiceImpl")
 public class PluginServiceImpl implements PluginService {
 	@Resource
-	private List<PaymentPlugin> IIIllIlI = new ArrayList();
+	private List<PaymentPlugin> paymentPlugins = new ArrayList();
 	@Resource
-	private List<StoragePlugin> IIIllIll = new ArrayList();
+	private List<StoragePlugin> storagePlugins = new ArrayList();
 	@Resource
-	private Map<String, PaymentPlugin> IIIlllII = new HashMap();
+	private Map<String, PaymentPlugin> paymentPluginMap = new HashMap();
 	@Resource
-	private Map<String, StoragePlugin> IIIlllIl = new HashMap();
+	private Map<String, StoragePlugin> storagePluginMap = new HashMap();
 
 	public List<PaymentPlugin> getPaymentPlugins() {
-		Collections.sort(this.IIIllIlI);
-		return this.IIIllIlI;
+		Collections.sort(this.paymentPlugins);
+		return this.paymentPlugins;
 	}
 
 	public List<StoragePlugin> getStoragePlugins() {
-		Collections.sort(this.IIIllIll);
-		return this.IIIllIll;
+		Collections.sort(this.storagePlugins);
+		return this.storagePlugins;
 	}
 
 	public List<PaymentPlugin> getPaymentPlugins(boolean isEnabled)
   {
     ArrayList localArrayList = new ArrayList();
-    CollectionUtils.select(this.IIIllIlI, new _cls1(isEnabled), localArrayList);
+    CollectionUtils.select(this.paymentPlugins, new _cls1(isEnabled), localArrayList);
     Collections.sort(localArrayList);
     return localArrayList;
   }
@@ -48,17 +48,17 @@ public class PluginServiceImpl implements PluginService {
 	public List<StoragePlugin> getStoragePlugins(boolean isEnabled)
   {
     ArrayList localArrayList = new ArrayList();
-    CollectionUtils.select(this.IIIllIll, new _cls2(isEnabled), localArrayList);
+    CollectionUtils.select(this.storagePlugins, new _cls2(isEnabled), localArrayList);
     Collections.sort(localArrayList);
     return localArrayList;
   }
 
 	public PaymentPlugin getPaymentPlugin(String id) {
-		return (PaymentPlugin) this.IIIlllII.get(id);
+		return (PaymentPlugin) this.paymentPluginMap.get(id);
 	}
 
 	public StoragePlugin getStoragePlugin(String id) {
-		return (StoragePlugin) this.IIIlllIl.get(id);
+		return (StoragePlugin) this.storagePluginMap.get(id);
 	}
 
 	private class _cls1 implements Predicate {

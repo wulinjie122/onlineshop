@@ -36,12 +36,16 @@ public class ReturnsController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ReturnsController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ReturnsController
+
+ * JD-Core Version:    0.7.0.1
+
  */

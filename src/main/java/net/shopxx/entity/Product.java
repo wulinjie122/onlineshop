@@ -70,10 +70,10 @@ public class Product
     public static final String FULL_NAME_SPECIFICATION_SUFFIX = "]";
     public static final String FULL_NAME_SPECIFICATION_SEPARATOR = " ";
     private static String IIIllIlI;
-    private String IIIllIll;
-    private String IIIlllII;
+    private String sn;
+    private String name;
     private String IIIlllIl;
-    private BigDecimal IIIllllI;
+    private BigDecimal price;
     private BigDecimal IIIlllll;
     private BigDecimal IIlIIIII;
     private String IIlIIIIl;
@@ -86,10 +86,10 @@ public class Product
     private Boolean IIlIlIII;
     private Boolean IIlIlIIl;
     private Boolean IIlIlIlI;
-    private Boolean IIlIlIll;
+    private Boolean isGift;
     private String IIlIllII;
     private String IIlIllIl;
-    private String IIlIlllI;
+    private String keyword;
     private String IIlIllll;
     private String IIllIIII;
     private String IIllIIIl;
@@ -161,11 +161,11 @@ public class Product
     @Length(max = 200)
     @Column(nullable = false, unique = true)
     public String getSn() {
-        return this.IIIllIll;
+        return this.sn;
     }
 
     public void setSn(String sn) {
-        this.IIIllIll = sn;
+        this.sn = sn;
     }
 
     @JsonProperty
@@ -174,11 +174,11 @@ public class Product
     @Length(max = 200)
     @Column(nullable = false)
     public String getName() {
-        return this.IIIlllII;
+        return this.name;
     }
 
     public void setName(String name) {
-        this.IIIlllII = name;
+        this.name = name;
     }
 
     @JsonProperty
@@ -201,11 +201,11 @@ public class Product
     @Digits(integer = 12, fraction = 3)
     @Column(nullable = false, precision = 21, scale = 6)
     public BigDecimal getPrice() {
-        return this.IIIllllI;
+        return this.price;
     }
 
     public void setPrice(BigDecimal price) {
-        this.IIIllllI = price;
+        this.price = price;
     }
 
     @Min(0L)
@@ -341,11 +341,11 @@ public class Product
     @NotNull
     @Column(nullable = false)
     public Boolean getIsGift() {
-        return this.IIlIlIll;
+        return this.isGift;
     }
 
     public void setIsGift(Boolean isGift) {
-        this.IIlIlIll = isGift;
+        this.isGift = isGift;
     }
 
     @Field(store = Store.YES, index = Index.TOKENIZED, analyzer = @Analyzer(impl = IKAnalyzer.class))
@@ -370,14 +370,14 @@ public class Product
     @Field(store = Store.YES, index = Index.TOKENIZED, analyzer = @Analyzer(impl = IKAnalyzer.class))
     @Length(max = 200)
     public String getKeyword() {
-        return this.IIlIlllI;
+        return this.keyword;
     }
 
     public void setKeyword(String keyword) {
         if (keyword != null) {
             keyword = keyword.replaceAll("[,\\s]*,[,\\s]*", ",").replaceAll("^,|,$", "");
         }
-        this.IIlIlllI = keyword;
+        this.keyword = keyword;
     }
 
     @Length(max = 200)

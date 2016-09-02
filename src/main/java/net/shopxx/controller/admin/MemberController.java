@@ -16,11 +16,8 @@ import net.shopxx.Pageable;
 import net.shopxx.Setting;
 import net.shopxx.entity.Area;
 import net.shopxx.entity.BaseEntity;
-import net.shopxx.entity.BaseEntity.Save;
 import net.shopxx.entity.Member;
-import net.shopxx.entity.Member.Gender;
 import net.shopxx.entity.MemberAttribute;
-import net.shopxx.entity.MemberAttribute.Type;
 import net.shopxx.entity.MemberRank;
 import net.shopxx.service.AdminService;
 import net.shopxx.service.AreaService;
@@ -205,7 +202,7 @@ public class MemberController extends BaseController {
 		member.setInMessages(null);
 		member.setOutMessages(null);
 		this.memberService.save(member, this.IIlIIIIl.getCurrent());
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:list.jhtml";
 	}
 
@@ -326,7 +323,7 @@ public class MemberController extends BaseController {
 				"inMessages", "outMessages" });
 		this.memberService.update(localMember, modifyPoint, modifyBalance,
 				depositMemo, this.IIlIIIIl.getCurrent());
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:list.jhtml";
 	}
 
@@ -354,7 +351,7 @@ public class MemberController extends BaseController {
 			}
 			this.memberService.delete(ids);
 		}
-		return IIIlllII;
+		return SUCCESS;
 	}
 }
 

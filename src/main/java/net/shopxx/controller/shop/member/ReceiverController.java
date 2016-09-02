@@ -1,6 +1,5 @@
 package net.shopxx.controller.shop.member;
 
-import java.util.Set;
 import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
@@ -45,7 +44,7 @@ public class ReceiverController
     Member localMember = this.IIIllllI.getCurrent();
     if ((Receiver.MAX_RECEIVER_COUNT != null) && (localMember.getReceivers().size() >= Receiver.MAX_RECEIVER_COUNT.intValue()))
     {
-      IIIllIlI(redirectAttributes, Message.warn("shop.member.receiver.addCountNotAllowed", new Object[] { Receiver.MAX_RECEIVER_COUNT }));
+      getMessage(redirectAttributes, Message.warn("shop.member.receiver.addCountNotAllowed", new Object[] { Receiver.MAX_RECEIVER_COUNT }));
       return "redirect:list.jhtml";
     }
     return "shop/member/receiver/add";
@@ -64,7 +63,7 @@ public class ReceiverController
     }
     receiver.setMember(localMember);
     this.IIlIIIII.save(receiver);
-    IIIllIlI(redirectAttributes, MESSAGE_SUCCESS);
+    getMessage(redirectAttributes, MESSAGE_SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -99,7 +98,7 @@ public class ReceiverController
       return "/shop/common/error";
     }
     this.IIlIIIII.update(receiver, new String[] { "member" });
-    IIIllIlI(redirectAttributes, MESSAGE_SUCCESS);
+    getMessage(redirectAttributes, MESSAGE_SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -120,8 +119,12 @@ public class ReceiverController
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.shop.member.ReceiverController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.shop.member.ReceiverController
+
+ * JD-Core Version:    0.7.0.1
+
  */

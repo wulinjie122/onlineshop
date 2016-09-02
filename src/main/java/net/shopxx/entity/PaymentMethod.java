@@ -20,9 +20,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="xx_payment_method")
-public class PaymentMethod
-  extends OrderEntity
-{
+public class PaymentMethod extends OrderEntity {
+
   private static final long serialVersionUID = 6949816500116581199L;
   private String IIIllIlI;
   private PaymentMethod.Type IIIllIll;

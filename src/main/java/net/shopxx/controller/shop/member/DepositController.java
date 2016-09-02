@@ -10,8 +10,6 @@ import net.shopxx.Setting;
 import net.shopxx.controller.shop.BaseController;
 import net.shopxx.entity.Member;
 import net.shopxx.entity.Payment;
-import net.shopxx.entity.Payment.Status;
-import net.shopxx.entity.Payment.Type;
 import net.shopxx.entity.Sn;
 import net.shopxx.plugin.PaymentPlugin;
 import net.shopxx.service.DepositService;
@@ -80,7 +78,7 @@ public class DepositController
     this.IIlIIIIl.save(localPayment);
     model.addAttribute("url", localPaymentPlugin.getUrl());
     model.addAttribute("method", localPaymentPlugin.getMethod());
-    model.addAttribute("parameterMap", localPaymentPlugin.getParameterMap(localPayment.getSn(), amount, IIIllIlI("shop.member.deposit.recharge", new Object[0]), request));
+    model.addAttribute("parameterMap", localPaymentPlugin.getParameterMap(localPayment.getSn(), amount, getMessage("shop.member.deposit.recharge", new Object[0]), request));
     return "shop/payment/submit";
   }
   

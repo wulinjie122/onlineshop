@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.Brand;
-import net.shopxx.entity.Brand.Type;
 import net.shopxx.service.BrandService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -43,7 +42,7 @@ public class BrandController
     brand.setProductCategories(null);
     brand.setPromotions(null);
     this.IIIlllIl.save(brand);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -67,7 +66,7 @@ public class BrandController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(brand, new String[] { "products", "productCategories", "promotions" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -83,12 +82,16 @@ public class BrandController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.BrandController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.BrandController
+
+ * JD-Core Version:    0.7.0.1
+
  */

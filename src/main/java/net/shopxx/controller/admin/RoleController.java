@@ -1,6 +1,5 @@
 package net.shopxx.controller.admin;
 
-import java.util.Set;
 import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
@@ -35,7 +34,7 @@ public class RoleController
     role.setIsSystem(Boolean.valueOf(false));
     role.setAdmins(null);
     this.IIIlllIl.save(role);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -57,7 +56,7 @@ public class RoleController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(role, new String[] { "isSystem", "admins" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -83,12 +82,16 @@ public class RoleController
       }
       this.IIIlllIl.delete(ids);
     }
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.RoleController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.RoleController
+
+ * JD-Core Version:    0.7.0.1
+
  */

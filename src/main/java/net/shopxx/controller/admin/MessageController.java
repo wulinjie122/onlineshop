@@ -144,7 +144,7 @@ public class MessageController
     this.IIIlllIl.update(localMessage1);
     if (((localMessage1.getReceiver() == null) && (!localMessage1.getSenderDelete().booleanValue())) || ((localMessage1.getSender() == null) && (!localMessage1.getReceiverDelete().booleanValue())))
     {
-      IIIllIlI(redirectAttributes, IIIlllII);
+      IIIllIlI(redirectAttributes, SUCCESS);
       return "redirect:view.jhtml?id=" + localMessage1.getId();
     }
     IIIllIlI(redirectAttributes, net.shopxx.Message.success("admin.message.replySuccess", new Object[0]));
@@ -174,12 +174,16 @@ public class MessageController
         this.IIIlllIl.delete(localLong, null);
       }
     }
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.MessageController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.MessageController
+
+ * JD-Core Version:    0.7.0.1
+
  */

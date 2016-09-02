@@ -55,7 +55,7 @@ public class BaseController {
     return false;
   }
   
-  protected String IIIllIlI(BigDecimal paramBigDecimal, boolean paramBoolean1, boolean paramBoolean2)
+  protected String getMessage(BigDecimal paramBigDecimal, boolean paramBoolean1, boolean paramBoolean2)
   {
     Setting settings = SettingUtils.get();
     String str = settings.setScale(paramBigDecimal).toString();
@@ -68,12 +68,12 @@ public class BaseController {
     return str;
   }
   
-  protected String IIIllIlI(String paramString, Object... paramVarArgs)
+  protected String getMessage(String paramString, Object... paramVarArgs)
   {
     return SpringUtils.getMessage(paramString, paramVarArgs);
   }
   
-  protected void IIIllIlI(RedirectAttributes paramRedirectAttributes, Message paramMessage)
+  protected void getMessage(RedirectAttributes paramRedirectAttributes, Message paramMessage)
   {
     if ((paramRedirectAttributes != null) && (paramMessage != null)) {
       paramRedirectAttributes.addFlashAttribute(FlashMessageDirective.FLASH_MESSAGE_ATTRIBUTE_NAME, paramMessage);

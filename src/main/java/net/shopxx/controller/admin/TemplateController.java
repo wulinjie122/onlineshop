@@ -1,9 +1,7 @@
 package net.shopxx.controller.admin;
 
-import freemarker.template.Configuration;
 import javax.annotation.Resource;
 import net.shopxx.Template;
-import net.shopxx.Template.Type;
 import net.shopxx.service.TemplateService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -41,7 +39,7 @@ public class TemplateController
     }
     this.IIIllllI.write(id, content);
     this.IIIlllIl.getConfiguration().clearTemplateCache();
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   

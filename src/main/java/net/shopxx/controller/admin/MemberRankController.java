@@ -1,7 +1,6 @@
 package net.shopxx.controller.admin;
 
 import java.math.BigDecimal;
-import java.util.Set;
 import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
@@ -65,7 +64,7 @@ public class MemberRankController
     memberRank.setMembers(null);
     memberRank.setPromotions(null);
     this.IIIlllIl.save(memberRank);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -98,7 +97,7 @@ public class MemberRankController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(memberRank, new String[] { "members", "promotions" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -128,12 +127,16 @@ public class MemberRankController
       }
       this.IIIlllIl.delete(ids);
     }
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.MemberRankController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.MemberRankController
+
+ * JD-Core Version:    0.7.0.1
+
  */

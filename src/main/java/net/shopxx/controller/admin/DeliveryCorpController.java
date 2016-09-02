@@ -33,7 +33,7 @@ public class DeliveryCorpController
     }
     deliveryCorp.setShippingMethods(null);
     this.IIIlllIl.save(deliveryCorp);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -51,7 +51,7 @@ public class DeliveryCorpController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(deliveryCorp, new String[] { "shippingMethods" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -67,12 +67,16 @@ public class DeliveryCorpController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.DeliveryCorpController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.DeliveryCorpController
+
+ * JD-Core Version:    0.7.0.1
+
  */

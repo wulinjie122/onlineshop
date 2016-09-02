@@ -4,67 +4,69 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+
 import net.shopxx.plugin.PaymentPlugin;
-import net.shopxx.plugin.PaymentPlugin.Method;
 import org.springframework.stereotype.Component;
 
 @Component("alipayDirectPlugin")
 public class AlipayDirectPlugin extends PaymentPlugin {
-	public String getName()
-  {
-    return "支付宝即时交易";
-  }
 
-	public String getVersion() {
-		return "1.0";
-	}
+    @Override
+    public String getName() {
+        return "shopxx";
+    }
 
-	public String getAuthor() {
-		return "SHOP++";
-	}
+    @Override
+    public String getVersion() {
+        return "1.0";
+    }
 
-	public String getSiteUrl() {
-		return "http://www.shopxx.net";
-	}
+    public String getAuthor() {
+        return "SHOP++";
+    }
 
-	public String getInstallUrl() {
-		return "alipay_direct/install.jhtml";
-	}
+    public String getSiteUrl() {
+        return "http://www.shopxx.net";
+    }
 
-	public String getUninstallUrl() {
-		return "alipay_direct/uninstall.jhtml";
-	}
+    public String getInstallUrl() {
+        return "alipay_direct/install.jhtml";
+    }
 
-	public String getSettingUrl() {
-		return "alipay_direct/setting.jhtml";
-	}
+    public String getUninstallUrl() {
+        return "alipay_direct/uninstall.jhtml";
+    }
 
-	public String getUrl() {
-		return "https://mapi.alipay.com/gateway.do";
-	}
+    public String getSettingUrl() {
+        return "alipay_direct/setting.jhtml";
+    }
 
-	public PaymentPlugin.Method getMethod() {
-		return PaymentPlugin.Method.get;
-	}
+    public String getUrl() {
+        return "https://mapi.alipay.com/gateway.do";
+    }
 
-	public Integer getTimeout() {
-		return Integer.valueOf(21600);
-	}
+    public PaymentPlugin.Method getMethod() {
+        return PaymentPlugin.Method.get;
+    }
 
-	public Map<String, String> getParameterMap(String sn, BigDecimal amount,
-			String description, HttpServletRequest request) {
-		return new HashMap();
-	}
+    public Integer getTimeout() {
+        return Integer.valueOf(21600);
+    }
 
-	public boolean verify(String sn, HttpServletRequest request) {
-		return false;
-	}
+    public Map<String, String> getParameterMap(String sn, BigDecimal amount,
+                                               String description, HttpServletRequest request) {
+        return new HashMap();
+    }
 
-	public BigDecimal getAmount(String sn, HttpServletRequest request) {
-		return new BigDecimal(request.getParameter("total_fee"));
-	}
+    public boolean verify(String sn, HttpServletRequest request) {
+        return false;
+    }
 
-	public String getNotifyContext(String sn, HttpServletRequest request) {
-		return "success";
-	}
+    public BigDecimal getAmount(String sn, HttpServletRequest request) {
+        return new BigDecimal(request.getParameter("total_fee"));
+    }
+
+    public String getNotifyContext(String sn, HttpServletRequest request) {
+        return "success";
+    }
 }

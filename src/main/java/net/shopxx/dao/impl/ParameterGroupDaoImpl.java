@@ -34,7 +34,7 @@ public class ParameterGroupDaoImpl extends BaseDaoImpl<ParameterGroup, Long> imp
 		// ��ʱ�޸�
 		// CollectionUtils.select(parameterGroup.getParameters(), new
 		// ParameterGroupDaoImpl.1(this), localHashSet);
-		List localList1 = this.IIIllIll.findList(parameterGroup, localHashSet);
+		List localList1 = this.getNotifyUrl.findList(parameterGroup, localHashSet);
 		for (int i = 0; i < localList1.size(); i++) {
 			Parameter localParameter = (Parameter) localList1.get(i);
 			String str = "select product from Product product join product.parameterValue parameterValue where index(parameterValue) = :parameter";

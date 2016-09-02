@@ -1,7 +1,6 @@
 package net.shopxx.controller.admin;
 
 import java.util.Iterator;
-import java.util.List;
 import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
@@ -51,7 +50,7 @@ public class ParameterGroupController
       return "/admin/common/error";
     }
     this.IIIlllIl.save(parameterGroup);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -81,7 +80,7 @@ public class ParameterGroupController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(parameterGroup);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -97,12 +96,16 @@ public class ParameterGroupController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ParameterGroupController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ParameterGroupController
+
+ * JD-Core Version:    0.7.0.1
+
  */

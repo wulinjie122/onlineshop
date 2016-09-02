@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.Review;
-import net.shopxx.entity.Review.Type;
 import net.shopxx.service.ReviewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,7 +36,7 @@ public class ReviewController
     }
     localReview.setIsShow(isShow);
     this.IIIlllIl.update(localReview);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -55,12 +54,16 @@ public class ReviewController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ReviewController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ReviewController
+
+ * JD-Core Version:    0.7.0.1
+
  */

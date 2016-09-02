@@ -9,9 +9,3 @@ public abstract interface PluginConfigService
   
   public abstract PluginConfig findByPluginId(String paramString);
 }
-
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.service.PluginConfigService
- * JD-Core Version:    0.7.0.1
- */

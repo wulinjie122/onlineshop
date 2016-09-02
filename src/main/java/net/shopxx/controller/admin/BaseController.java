@@ -21,9 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public class BaseController
 {
-  protected static final String IIIllIlI = "/admin/common/error";
-  protected static final Message IIIllIll = Message.error("admin.message.error", new Object[0]);
-  protected static final Message IIIlllII = Message.success("admin.message.success", new Object[0]);
+  protected static final String ERROR_PAGE = "/admin/common/error";
+  protected static final Message ERROR = Message.error("admin.message.error", new Object[0]);
+  protected static final Message SUCCESS = Message.success("admin.message.success", new Object[0]);
   private static final String IIIlllIl = "constraintViolations";
   @Resource(name="validator")
   private Validator IIIllllI;
@@ -92,8 +92,12 @@ public class BaseController
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.BaseController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.BaseController
+
+ * JD-Core Version:    0.7.0.1
+
  */

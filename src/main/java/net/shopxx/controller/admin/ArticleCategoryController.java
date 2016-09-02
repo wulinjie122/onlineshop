@@ -39,7 +39,7 @@ public class ArticleCategoryController
     articleCategory.setChildren(null);
     articleCategory.setArticles(null);
     this.IIIlllIl.save(articleCategory);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -72,7 +72,7 @@ public class ArticleCategoryController
       }
     }
     this.IIIlllIl.update(articleCategory, new String[] { "treePath", "grade", "children", "articles" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -89,7 +89,7 @@ public class ArticleCategoryController
   {
     ArticleCategory localArticleCategory = (ArticleCategory)this.IIIlllIl.find(id);
     if (localArticleCategory == null) {
-      return IIIllIll;
+      return ERROR;
     }
     Set localSet1 = localArticleCategory.getChildren();
     if ((localSet1 != null) && (!localSet1.isEmpty())) {
@@ -100,12 +100,16 @@ public class ArticleCategoryController
       return Message.error("admin.articleCategory.deleteExistArticleNotAllowed", new Object[0]);
     }
     this.IIIlllIl.delete(id);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ArticleCategoryController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ArticleCategoryController
+
+ * JD-Core Version:    0.7.0.1
+
  */

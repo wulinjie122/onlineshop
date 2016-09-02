@@ -31,7 +31,7 @@ public class SeoController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(seo, new String[] { "type" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -43,8 +43,12 @@ public class SeoController
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.SeoController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.SeoController
+
+ * JD-Core Version:    0.7.0.1
+
  */

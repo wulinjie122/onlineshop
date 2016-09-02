@@ -53,14 +53,14 @@ public class SettingController extends BaseController
   public Message mailTest(String smtpFromMail, String smtpHost, Integer smtpPort, String smtpUsername, String smtpPassword, String toMail)
   {
     if (StringUtils.isEmpty(toMail))
-      return IIIllIll;
+      return ERROR;
     Setting localSetting = SettingUtils.get();
     if (StringUtils.isEmpty(smtpPassword))
       smtpPassword = localSetting.getSmtpPassword();
     try
     {
       if ((!IIIllIlI(Setting.class, "smtpFromMail", smtpFromMail, new Class[0])) || (!IIIllIlI(Setting.class, "smtpHost", smtpHost, new Class[0])) || (!IIIllIlI(Setting.class, "smtpPort", smtpPort, new Class[0])) || (!IIIllIlI(Setting.class, "smtpUsername", smtpUsername, new Class[0])))
-        return IIIllIll;
+        return ERROR;
       this.IIIllllI.sendTestMail(smtpFromMail, smtpHost, smtpPort, smtpUsername, smtpPassword, toMail);
     }
     catch (MailSendException localMailSendException)
@@ -185,7 +185,7 @@ public class SettingController extends BaseController
 		// IOUtils.closeQuietly(fileoutputstream);
 		// throw exception1;
 		// IOUtils.closeQuietly(fileoutputstream);
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:edit.jhtml";
 	}
 }

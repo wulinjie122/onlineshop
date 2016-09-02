@@ -14,9 +14,7 @@ import net.shopxx.Setting;
 import net.shopxx.controller.shop.BaseController;
 import net.shopxx.entity.Area;
 import net.shopxx.entity.Member;
-import net.shopxx.entity.Member.Gender;
 import net.shopxx.entity.MemberAttribute;
-import net.shopxx.entity.MemberAttribute.Type;
 import net.shopxx.service.AreaService;
 import net.shopxx.service.MemberAttributeService;
 import net.shopxx.service.MemberService;
@@ -137,13 +135,17 @@ public class ProfileController
       }
     }
     this.IIIlllIl.update(localMember);
-    IIIllIlI(redirectAttributes, MESSAGE_SUCCESS);
+    getMessage(redirectAttributes, MESSAGE_SUCCESS);
     return "redirect:edit.jhtml";
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.shop.member.ProfileController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.shop.member.ProfileController
+
+ * JD-Core Version:    0.7.0.1
+
  */

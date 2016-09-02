@@ -117,10 +117,10 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
 	//��ʱ�޸� wulinjie
 	/*
     Assert.notNull(entity);
-    if (this.IIIllIll.isManaged(entity)) {
+    if (this.getNotifyUrl.isManaged(entity)) {
       throw new IllegalArgumentException("Entity must not be managed");
     }
-    Object localObject = this.IIIllIll.find(this.IIIllIll.getIdentifier(entity));
+    Object localObject = this.getNotifyUrl.find(this.getNotifyUrl.getIdentifier(entity));
     if (localObject != null)
     {
       entityManager(entity, localObject, (String[])ArrayUtils.addAll(ignoreProperties, entityManager));
@@ -144,7 +144,7 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
 	  /*
     if (ids != null) {
       for (Serializable localSerializable : ids) {
-        delete(this.IIIllIll.find(localSerializable));
+        delete(this.getNotifyUrl.find(localSerializable));
       }
     }
     */

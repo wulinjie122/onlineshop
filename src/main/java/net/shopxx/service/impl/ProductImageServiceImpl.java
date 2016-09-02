@@ -130,7 +130,7 @@ public class ProductImageServiceImpl
 			  if (localStoragePlugin.getIsEnabled()){
 				  Setting localSetting = SettingUtils.get();
 				  String str = System.getProperty("java.io.tmpdir");
-				  File localFile1 = new File(ProductImageServiceImpl.IIIllIll(this.productImageServiceImpl).getRealPath(localSetting.getWatermarkImage()));
+				  File localFile1 = new File(ProductImageServiceImpl.getNotifyUrl(this.productImageServiceImpl).getRealPath(localSetting.getWatermarkImage()));
 				  File localFile2 = new File(str + "/upload_" + UUID.randomUUID() + "." + "jpg");
 				  File localFile3 = new File(str + "/upload_" + UUID.randomUUID() + "." + "jpg");
 				  File localFile4 = new File(str + "/upload_" + UUID.randomUUID() + "." + "jpg");

@@ -40,7 +40,7 @@ public class ShippingMethodController
     shippingMethod.setPaymentMethods(null);
     shippingMethod.setOrders(null);
     this.IIIlllIl.save(shippingMethod);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -60,7 +60,7 @@ public class ShippingMethodController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(shippingMethod, new String[] { "paymentMethods", "orders" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -79,12 +79,16 @@ public class ShippingMethodController
       return Message.error("admin.common.deleteAllNotAllowed", new Object[0]);
     }
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ShippingMethodController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ShippingMethodController
+
+ * JD-Core Version:    0.7.0.1
+
  */

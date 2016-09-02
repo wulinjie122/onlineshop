@@ -2,17 +2,15 @@ package net.shopxx.controller.admin;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import net.shopxx.FileInfo.FileType;
+
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.Setting;
@@ -23,13 +21,11 @@ import net.shopxx.entity.MemberRank;
 import net.shopxx.entity.Parameter;
 import net.shopxx.entity.ParameterGroup;
 import net.shopxx.entity.Product;
-import net.shopxx.entity.Product.OrderType;
 import net.shopxx.entity.ProductCategory;
 import net.shopxx.entity.ProductImage;
 import net.shopxx.entity.Promotion;
 import net.shopxx.entity.Specification;
 import net.shopxx.entity.SpecificationValue;
-import net.shopxx.entity.Tag.Type;
 import net.shopxx.service.BrandService;
 import net.shopxx.service.FileService;
 import net.shopxx.service.GoodsService;
@@ -48,7 +44,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller("adminProductController")
@@ -298,7 +293,7 @@ public class ProductController extends BaseController
       goods.getProducts().clear();
       goods.getProducts().addAll(arraylist);
       IIIlllll.save(goods);
-      IIIllIlI(redirectAttributes, IIIlllII);
+      IIIllIlI(redirectAttributes, SUCCESS);
       return "redirect:list.jhtml";
   }
 
@@ -485,7 +480,7 @@ public class ProductController extends BaseController
       goods.getProducts().clear();
       goods.getProducts().addAll(arraylist);
       IIIlllll.update(goods);
-      IIIllIlI(redirectAttributes, IIIlllII);
+      IIIllIlI(redirectAttributes, SUCCESS);
       return "redirect:list.jhtml";
   }
 
@@ -522,7 +517,7 @@ public class ProductController extends BaseController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 
   private BigDecimal IIIllIlI(BigDecimal paramBigDecimal)

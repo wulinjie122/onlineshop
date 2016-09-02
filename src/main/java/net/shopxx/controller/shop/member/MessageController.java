@@ -76,10 +76,10 @@ public class MessageController
     this.IIIlllIl.save(localMessage2);
     if (isDraft.booleanValue())
     {
-      IIIllIlI(redirectAttributes, net.shopxx.Message.success("shop.member.message.saveDraftSuccess", new Object[0]));
+      getMessage(redirectAttributes, net.shopxx.Message.success("shop.member.message.saveDraftSuccess", new Object[0]));
       return "redirect:draft.jhtml";
     }
-    IIIllIlI(redirectAttributes, net.shopxx.Message.success("shop.member.message.sendSuccess", new Object[0]));
+    getMessage(redirectAttributes, net.shopxx.Message.success("shop.member.message.sendSuccess", new Object[0]));
     return "redirect:list.jhtml";
   }
   
@@ -146,10 +146,10 @@ public class MessageController
     this.IIIlllIl.update(localMessage1);
     if (((localMember == localMessage1.getReceiver()) && (!localMessage1.getSenderDelete().booleanValue())) || ((localMember == localMessage1.getSender()) && (!localMessage1.getReceiverDelete().booleanValue())))
     {
-      IIIllIlI(redirectAttributes, MESSAGE_SUCCESS);
+      getMessage(redirectAttributes, MESSAGE_SUCCESS);
       return "redirect:view.jhtml?id=" + localMessage1.getId();
     }
-    IIIllIlI(redirectAttributes, net.shopxx.Message.success("shop.member.message.replySuccess", new Object[0]));
+    getMessage(redirectAttributes, net.shopxx.Message.success("shop.member.message.replySuccess", new Object[0]));
     return "redirect:list.jhtml";
   }
   
@@ -181,8 +181,12 @@ public class MessageController
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.shop.member.MessageController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.shop.member.MessageController
+
+ * JD-Core Version:    0.7.0.1
+
  */

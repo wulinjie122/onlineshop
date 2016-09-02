@@ -32,7 +32,7 @@ public class DeliveryTemplateController
       return "/admin/common/error";
     }
     this.IIIlllIl.save(deliveryTemplate);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -50,7 +50,7 @@ public class DeliveryTemplateController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(deliveryTemplate);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -66,12 +66,16 @@ public class DeliveryTemplateController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.DeliveryTemplateController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.DeliveryTemplateController
+
+ * JD-Core Version:    0.7.0.1
+
  */

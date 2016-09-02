@@ -56,13 +56,17 @@ public class ProfileController
     }
     localAdmin.setEmail(email);
     this.IIIlllIl.update(localAdmin);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:edit.jhtml";
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ProfileController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ProfileController
+
+ * JD-Core Version:    0.7.0.1
+
  */

@@ -42,7 +42,7 @@ public class ConsultationController
     localConsultation2.setContent(content);
     localConsultation2.setIp(request.getRemoteAddr());
     this.IIIlllIl.reply(localConsultation1, localConsultation2);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:reply.jhtml?id=" + id;
   }
   
@@ -65,7 +65,7 @@ public class ConsultationController
       localConsultation.setIsShow(isShow);
       this.IIIlllIl.update(localConsultation);
     }
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -82,10 +82,10 @@ public class ConsultationController
   {
     Consultation localConsultation = (Consultation)this.IIIlllIl.find(id);
     if ((localConsultation == null) || (localConsultation.getForConsultation() == null)) {
-      return IIIllIll;
+      return ERROR;
     }
     this.IIIlllIl.delete(localConsultation);
-    return IIIlllII;
+    return SUCCESS;
   }
   
   @RequestMapping(value={"/delete"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
@@ -95,12 +95,16 @@ public class ConsultationController
     if (ids != null) {
       this.IIIlllIl.delete(ids);
     }
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ConsultationController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ConsultationController
+
+ * JD-Core Version:    0.7.0.1
+
  */

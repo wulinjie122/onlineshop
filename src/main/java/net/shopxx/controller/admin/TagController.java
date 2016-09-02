@@ -4,9 +4,7 @@ import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.BaseEntity;
-import net.shopxx.entity.BaseEntity.Save;
 import net.shopxx.entity.Tag;
-import net.shopxx.entity.Tag.Type;
 import net.shopxx.service.TagService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,7 +36,7 @@ public class TagController
     tag.setArticles(null);
     tag.setProducts(null);
     this.IIIlllIl.save(tag);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -57,7 +55,7 @@ public class TagController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(tag, new String[] { "type", "articles", "products" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -73,12 +71,16 @@ public class TagController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.TagController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.TagController
+
+ * JD-Core Version:    0.7.0.1
+
  */

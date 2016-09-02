@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import net.shopxx.entity.Member;
 import net.shopxx.entity.Order;
 import net.shopxx.entity.Payment;
@@ -23,156 +24,128 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("shopPaymentController")
 @RequestMapping({"/payment"})
-public class PaymentController
-  extends BaseController
-{
-  @Resource(name="orderServiceImpl")
-  private OrderService IIIlllIl;
-  @Resource(name="memberServiceImpl")
-  private MemberService IIIllllI;
-  @Resource(name="pluginServiceImpl")
-  private PluginService IIIlllll;
-  @Resource(name="paymentServiceImpl")
-  private PaymentService IIlIIIII;
-  @Resource(name="snServiceImpl")
-  private SnService IIlIIIIl;
-  
-  @RequestMapping(value={"/submit"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
-  public String submit(String sn, String paymentPluginId, HttpServletRequest request, ModelMap model)
-  {
-    Order localOrder = this.IIIlllIl.findBySn(sn);
-    if (localOrder == null) {
-      return "/shop/common/error";
-    }
-    Member localMember = this.IIIllllI.getCurrent();
-    if ((localMember == null) || (localOrder.getMember() != localMember) || (localOrder.isExpired())) {
-      return "/shop/common/error";
-    }
-    if ((localOrder.getPaymentMethod() == null) || (localOrder.getPaymentMethod().getType() == PaymentMethod.Type.offline)) {
-      return "/shop/common/error";
-    }
-    if ((localOrder.getPaymentStatus() != Order.PaymentStatus.unpaid) && (localOrder.getPaymentStatus() != Order.PaymentStatus.partialPayment)) {
-      return "/shop/common/error";
-    }
-    if (localOrder.getAmountPayable().compareTo(new BigDecimal(0)) <= 0) {
-      return "/shop/common/error";
-    }
-    PaymentPlugin localPaymentPlugin = this.IIIlllll.getPaymentPlugin(paymentPluginId);
-    if ((localPaymentPlugin == null) || (!localPaymentPlugin.getIsEnabled())) {
-      return "/shop/common/error";
-    }
-    BigDecimal localBigDecimal1 = localPaymentPlugin.getFee(localOrder.getAmountPayable());
-    BigDecimal localBigDecimal2 = localOrder.getAmountPayable().add(localBigDecimal1);
-    Payment localPayment = new Payment();
-    localPayment.setSn(this.IIlIIIIl.generate(Sn.Type.payment));
-    localPayment.setType(Payment.Type.online);
-    localPayment.setStatus(Payment.Status.wait);
-    localPayment.setPaymentMethod(localOrder.getPaymentMethodName() + "-" + localPaymentPlugin.getPaymentName());
-    localPayment.setFee(localBigDecimal1);
-    localPayment.setAmount(localBigDecimal2);
-    localPayment.setPaymentPluginId(paymentPluginId);
-    localPayment.setExpire(localPaymentPlugin.getTimeout() != null ? DateUtils.addMinutes(new Date(), localPaymentPlugin.getTimeout().intValue()) : null);
-    localPayment.setMember(null);
-    localPayment.setOrder(localOrder);
-    this.IIlIIIII.save(localPayment);
-    model.addAttribute("url", localPaymentPlugin.getUrl());
-    model.addAttribute("method", localPaymentPlugin.getMethod());
-    model.addAttribute("parameterMap", localPaymentPlugin.getParameterMap(localPayment.getSn(), localBigDecimal2, localOrder.getProductName(), request));
-    return "shop/payment/submit";
-  }
-  
-  @RequestMapping({"/return/{sn}"})
-  public String returns(@PathVariable String sn, HttpServletRequest request, ModelMap model)
-  {
-    Payment localPayment = this.IIlIIIII.findBySn(sn);
-    if (localPayment == null) {
-      return "/shop/common/error";
-    }
-    if (localPayment.getStatus() == Payment.Status.wait)
-    {
-      PaymentPlugin localPaymentPlugin = this.IIIlllll.getPaymentPlugin(localPayment.getPaymentPluginId());
-      if ((localPaymentPlugin != null) && (localPaymentPlugin.verify(sn, request)))
-      {
-        BigDecimal localBigDecimal1 = localPaymentPlugin.getAmount(sn, request);
-        if (localBigDecimal1.compareTo(localPayment.getAmount()) >= 0)
-        {
-          Order localOrder = localPayment.getOrder();
-          if (localOrder != null)
-          {
-            if (localBigDecimal1.compareTo(localOrder.getAmountPayable()) >= 0) {
-              this.IIIlllIl.payment(localOrder, localPayment, null);
-            }
-          }
-          else
-          {
-            Member localMember = localPayment.getMember();
-            if (localMember != null)
-            {
-              BigDecimal localBigDecimal2 = localPayment.getAmount().subtract(localPayment.getFee());
-              this.IIIllllI.update(localMember, null, localBigDecimal2, IIIllIlI("shop.payment.paymentName", new Object[] { localPaymentPlugin.getPaymentName() }), null);
-            }
-          }
-        }
-        localPayment.setStatus(Payment.Status.success);
-        localPayment.setAmount(localBigDecimal1);
-        localPayment.setPaymentDate(new Date());
-      }
-      else
-      {
-        localPayment.setStatus(Payment.Status.failure);
-        localPayment.setPaymentDate(new Date());
-      }
-      this.IIlIIIII.update(localPayment);
-    }
-    model.addAttribute("payment", localPayment);
-    return "shop/payment/return";
-  }
-  
-  @RequestMapping({"/notify/{sn}"})
-  public String notify(@PathVariable String sn, HttpServletRequest request, ModelMap model)
-  {
-    Payment localPayment = this.IIlIIIII.findBySn(sn);
-    if (localPayment != null)
-    {
-      PaymentPlugin localPaymentPlugin = this.IIIlllll.getPaymentPlugin(localPayment.getPaymentPluginId());
-      if (localPaymentPlugin != null)
-      {
-        if ((localPayment.getStatus() == Payment.Status.wait) && (localPaymentPlugin.verify(sn, request)))
-        {
-          BigDecimal localBigDecimal1 = localPaymentPlugin.getAmount(sn, request);
-          if (localBigDecimal1.compareTo(localPayment.getAmount()) >= 0)
-          {
-            Order localOrder = localPayment.getOrder();
-            if (localOrder != null)
-            {
-              if (localBigDecimal1.compareTo(localOrder.getAmountPayable()) >= 0) {
-                this.IIIlllIl.payment(localOrder, localPayment, null);
-              }
-            }
-            else
-            {
-              Member localMember = localPayment.getMember();
-              if (localMember != null)
-              {
-                BigDecimal localBigDecimal2 = localPayment.getAmount().subtract(localPayment.getFee());
-                this.IIIllllI.update(localMember, null, localBigDecimal2, IIIllIlI("shop.payment.paymentName", new Object[] { localPaymentPlugin.getPaymentName() }), null);
-              }
-            }
-          }
-          localPayment.setStatus(Payment.Status.success);
-          localPayment.setAmount(localBigDecimal1);
-          localPayment.setPaymentDate(new Date());
-          this.IIlIIIII.update(localPayment);
-        }
-        model.addAttribute("notifyContext", localPaymentPlugin.getNotifyContext(sn, request));
-      }
-    }
-    return "shop/payment/notify";
-  }
-}
+public class PaymentController extends BaseController {
+    @Resource(name = "orderServiceImpl")
+    private OrderService orderService;
+    @Resource(name = "memberServiceImpl")
+    private MemberService memberService;
+    @Resource(name = "pluginServiceImpl")
+    private PluginService pluginService;
+    @Resource(name = "paymentServiceImpl")
+    private PaymentService paymentService;
+    @Resource(name = "snServiceImpl")
+    private SnService snService;
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.shop.PaymentController
- * JD-Core Version:    0.7.0.1
- */
+    @RequestMapping(value = {"/submit"}, method = {org.springframework.web.bind.annotation.RequestMethod.POST})
+    public String submit(String sn, String paymentPluginId, HttpServletRequest request, ModelMap model) {
+        Order order = this.orderService.findBySn(sn);       //查找订单
+        if (order == null) {
+            return "/shop/common/error";
+        }
+        Member member = this.memberService.getCurrent();
+        if ((member == null) || (order.getMember() != member) || (order.isExpired())) { //订单过期
+            return "/shop/common/error";
+        }
+        if ((order.getPaymentMethod() == null) || (order.getPaymentMethod().getType() == PaymentMethod.Type.offline)) { //离线支付
+            return "/shop/common/error";
+        }
+        if ((order.getPaymentStatus() != Order.PaymentStatus.unpaid) && (order.getPaymentStatus() != Order.PaymentStatus.partialPayment)) {
+            return "/shop/common/error";
+        }
+        if (order.getAmountPayable().compareTo(new BigDecimal(0)) <= 0) {
+            return "/shop/common/error";
+        }
+        PaymentPlugin paymentPlugin = this.pluginService.getPaymentPlugin(paymentPluginId);
+        if ((paymentPlugin == null) || (!paymentPlugin.getIsEnabled())) {
+            return "/shop/common/error";
+        }
+        BigDecimal fee = paymentPlugin.getFee(order.getAmountPayable());
+        BigDecimal localBigDecimal2 = order.getAmountPayable().add(fee);
+        Payment payment = new Payment();
+        payment.setSn(this.snService.generate(Sn.Type.payment));
+        payment.setType(Payment.Type.online);
+        payment.setStatus(Payment.Status.wait);
+        payment.setPaymentMethod(order.getPaymentMethodName() + "-" + paymentPlugin.getPaymentName());
+        payment.setFee(fee);
+        payment.setAmount(localBigDecimal2);
+        payment.setPaymentPluginId(paymentPluginId);
+        payment.setExpire(paymentPlugin.getTimeout() != null ? DateUtils.addMinutes(new Date(), paymentPlugin.getTimeout().intValue()) : null);
+        payment.setMember(null);
+        payment.setOrder(order);
+        this.paymentService.save(payment);
+        model.addAttribute("url", paymentPlugin.getUrl());
+        model.addAttribute("method", paymentPlugin.getMethod());
+        model.addAttribute("parameterMap", paymentPlugin.getParameterMap(payment.getSn(), localBigDecimal2, order.getProductName(), request));
+        return "shop/payment/submit";
+    }
+
+    @RequestMapping({"/return/{sn}"})
+    public String returns(@PathVariable String sn, HttpServletRequest request, ModelMap model) {
+        Payment payment = this.paymentService.findBySn(sn);
+        if (payment == null) {
+            return "/shop/common/error";
+        }
+        if (payment.getStatus() == Payment.Status.wait) {
+            PaymentPlugin paymentPlugin = this.pluginService.getPaymentPlugin(payment.getPaymentPluginId());
+            if ((paymentPlugin != null) && (paymentPlugin.verify(sn, request))) {
+                BigDecimal amount = paymentPlugin.getAmount(sn, request);
+                if (amount.compareTo(payment.getAmount()) >= 0) {
+                    Order order = payment.getOrder();
+                    if (order != null) {
+                        if (amount.compareTo(order.getAmountPayable()) >= 0) {
+                            this.orderService.payment(order, payment, null);
+                        }
+                    } else {
+                        Member member = payment.getMember();
+                        if (member != null) {
+                            BigDecimal localBigDecimal2 = payment.getAmount().subtract(payment.getFee());
+                            this.memberService.update(member, null, localBigDecimal2, getMessage("shop.payment.paymentName", new Object[]{paymentPlugin.getPaymentName()}), null);
+                        }
+                    }
+                }
+                payment.setStatus(Payment.Status.success);
+                payment.setAmount(amount);
+                payment.setPaymentDate(new Date());
+            } else {
+                payment.setStatus(Payment.Status.failure);
+                payment.setPaymentDate(new Date());
+            }
+            this.paymentService.update(payment);
+        }
+        model.addAttribute("payment", payment);
+        return "shop/payment/return";
+    }
+
+    @RequestMapping({"/notify/{sn}"})
+    public String notify(@PathVariable String sn, HttpServletRequest request, ModelMap model) {
+        Payment payment = this.paymentService.findBySn(sn);
+        if (payment != null) {
+            PaymentPlugin paymentPlugin = this.pluginService.getPaymentPlugin(payment.getPaymentPluginId());
+            if (paymentPlugin != null) {
+                if ((payment.getStatus() == Payment.Status.wait) && (paymentPlugin.verify(sn, request))) {
+                    BigDecimal localBigDecimal1 = paymentPlugin.getAmount(sn, request);
+                    if (localBigDecimal1.compareTo(payment.getAmount()) >= 0) {
+                        Order order = payment.getOrder();
+                        if (order != null) {
+                            if (localBigDecimal1.compareTo(order.getAmountPayable()) >= 0) {
+                                this.orderService.payment(order, payment, null);
+                            }
+                        } else {
+                            Member member = payment.getMember();
+                            if (member != null) {
+                                BigDecimal localBigDecimal2 = payment.getAmount().subtract(payment.getFee());
+                                this.memberService.update(member, null, localBigDecimal2, getMessage("shop.payment.paymentName", new Object[]{paymentPlugin.getPaymentName()}), null);
+                            }
+                        }
+                    }
+                    payment.setStatus(Payment.Status.success);
+                    payment.setAmount(localBigDecimal1);
+                    payment.setPaymentDate(new Date());
+                    this.paymentService.update(payment);
+                }
+                model.addAttribute("notifyContext", paymentPlugin.getNotifyContext(sn, request));
+            }
+        }
+        return "shop/payment/getNotifyUrl";
+    }
+}

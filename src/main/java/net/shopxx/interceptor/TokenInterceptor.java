@@ -8,8 +8,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class TokenInterceptor extends HandlerInterceptorAdapter {
 	//private static final String entityManager = "token";
-	//private static final String IIIllIll = "token";
-	//private static final String IIIlllII = "token";
+	//private static final String getNotifyUrl = "token";
+	//private static final String SUCCESS = "token";
 	private static final String ERR_MSG = "Bad or missing token!";
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

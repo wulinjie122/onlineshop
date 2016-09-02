@@ -100,7 +100,7 @@ public class CartController
       CookieUtils.addCookie(request, response, "cartId", localCart.getId().toString(), Integer.valueOf(604800));
       CookieUtils.addCookie(request, response, "cartKey", localCart.getKey(), Integer.valueOf(604800));
     }
-    return Message.success("shop.cart.addSuccess", new Object[] { Integer.valueOf(localCart.getQuantity()), IIIllIlI(localCart.getAmount(), true, false) });
+    return Message.success("shop.cart.addSuccess", new Object[] { Integer.valueOf(localCart.getQuantity()), getMessage(localCart.getAmount(), true, false) });
   }
   
   @RequestMapping(value={"/list"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
@@ -196,8 +196,12 @@ public class CartController
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.shop.CartController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.shop.CartController
+
+ * JD-Core Version:    0.7.0.1
+
  */

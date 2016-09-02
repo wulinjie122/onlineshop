@@ -9,7 +9,6 @@ import net.shopxx.ExcelView;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.Coupon;
-import net.shopxx.entity.Coupon.Operator;
 import net.shopxx.service.AdminService;
 import net.shopxx.service.CouponCodeService;
 import net.shopxx.service.CouponService;
@@ -64,7 +63,7 @@ public class CouponController
     coupon.setPromotions(null);
     coupon.setOrders(null);
     this.IIIlllIl.save(coupon);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -98,7 +97,7 @@ public class CouponController
       coupon.setPoint(null);
     }
     this.IIIlllIl.update(coupon, new String[] { "couponCodes", "promotions", "orders" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -114,7 +113,7 @@ public class CouponController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
   
   @RequestMapping(value={"/build"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
@@ -145,8 +144,12 @@ public class CouponController
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.CouponController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.CouponController
+
+ * JD-Core Version:    0.7.0.1
+
  */

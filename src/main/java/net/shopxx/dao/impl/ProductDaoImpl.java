@@ -84,7 +84,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product, Long> implements Produc
 		Root localRoot = localCriteriaQuery.from(Product.class);
 		localCriteriaQuery.select(localRoot);
 		Predicate localPredicate = localCriteriaBuilder.conjunction();
-		if (IIIllIll.matcher(keyword).matches()) {
+		if (getNotifyUrl.matcher(keyword).matches()) {
 			localPredicate = localCriteriaBuilder.and(localPredicate,
 					localCriteriaBuilder.or(new Predicate[] {
 							localCriteriaBuilder.equal(localRoot.get("id"),

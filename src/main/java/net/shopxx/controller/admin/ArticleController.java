@@ -47,7 +47,7 @@ public class ArticleController
     article.setHits(Long.valueOf(0L));
     article.setPageNumber(null);
     this.IIIlllIl.save(article);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -69,7 +69,7 @@ public class ArticleController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(article, new String[] { "hits", "pageNumber" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -85,12 +85,16 @@ public class ArticleController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ArticleController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ArticleController
+
+ * JD-Core Version:    0.7.0.1
+
  */

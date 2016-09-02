@@ -94,7 +94,7 @@ public class OrderController extends BaseController {
 		localOrder.setLockExpire(DateUtils.addSeconds(new Date(), 60));
 		localOrder.setOperator(localAdmin);
 		this.IIlIIIII.update(localOrder);
-		return IIIlllII;
+		return SUCCESS;
 	}
 
 	@RequestMapping(value = { "/view" }, method = { org.springframework.web.bind.annotation.RequestMethod.GET })
@@ -117,7 +117,7 @@ public class OrderController extends BaseController {
 				&& (localOrder.getOrderStatus() == Order.OrderStatus.unconfirmed)
 				&& (!localOrder.isLocked(localAdmin))) {
 			this.IIlIIIII.confirm(localOrder, localAdmin);
-			IIIllIlI(redirectAttributes, IIIlllII);
+			IIIllIlI(redirectAttributes, SUCCESS);
 		} else {
 			IIIllIlI(redirectAttributes,
 					Message.warn("admin.common.invalid", new Object[0]));
@@ -133,7 +133,7 @@ public class OrderController extends BaseController {
 				&& (localOrder.getOrderStatus() == Order.OrderStatus.confirmed)
 				&& (!localOrder.isLocked(localAdmin))) {
 			this.IIlIIIII.complete(localOrder, localAdmin);
-			IIIllIlI(redirectAttributes, IIIlllII);
+			IIIllIlI(redirectAttributes, SUCCESS);
 		} else {
 			IIIllIlI(redirectAttributes,
 					Message.warn("admin.common.invalid", new Object[0]));
@@ -150,7 +150,7 @@ public class OrderController extends BaseController {
 				&& (localOrder.getOrderStatus() == Order.OrderStatus.unconfirmed)
 				&& (!localOrder.isLocked(localAdmin))) {
 			this.IIlIIIII.cancel(localOrder, localAdmin);
-			IIIllIlI(redirectAttributes, IIIlllII);
+			IIIllIlI(redirectAttributes, SUCCESS);
 		} else {
 			IIIllIlI(redirectAttributes,
 					Message.warn("admin.common.invalid", new Object[0]));
@@ -196,7 +196,7 @@ public class OrderController extends BaseController {
 		payment.setDeposit(null);
 		payment.setMember(null);
 		this.IIlIIIII.payment(localOrder, payment, localAdmin);
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:view.jhtml?id=" + orderId;
 	}
 
@@ -227,7 +227,7 @@ public class OrderController extends BaseController {
 		refunds.setSn(this.IIlIIlIl.generate(Sn.Type.refunds));
 		refunds.setOperator(localAdmin.getUsername());
 		this.IIlIIIII.refunds(localOrder, refunds, localAdmin);
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:view.jhtml?id=" + orderId;
 	}
 
@@ -294,7 +294,7 @@ public class OrderController extends BaseController {
 					.generate(net.shopxx.entity.Sn.Type.shipping));
 			shipping.setOperator(admin.getUsername());
 			IIlIIIII.shipping(order, shipping, admin);
-			IIIllIlI(redirectAttributes, IIIlllII);
+			IIIllIlI(redirectAttributes, SUCCESS);
 			return (new StringBuilder("redirect:view.jhtml?id=")).append(
 					orderId).toString();
 		}
@@ -353,7 +353,7 @@ public class OrderController extends BaseController {
 			returns.setSn(IIlIIlIl.generate(net.shopxx.entity.Sn.Type.returns));
 			returns.setOperator(admin.getUsername());
 			IIlIIIII.returns(order, returns, admin);
-			IIIllIlI(redirectAttributes, IIIlllII);
+			IIIllIlI(redirectAttributes, SUCCESS);
 			return (new StringBuilder("redirect:view.jhtml?id=")).append(
 					orderId).toString();
 		}
@@ -392,7 +392,7 @@ public class OrderController extends BaseController {
 		localHashMap.put("price", localProduct.getPrice());
 		localHashMap.put("weight", localProduct.getWeight());
 		localHashMap.put("isGift", localProduct.getIsGift());
-		localHashMap.put("message", IIIlllII);
+		localHashMap.put("message", SUCCESS);
 		return localHashMap;
 	}
 
@@ -478,7 +478,7 @@ public class OrderController extends BaseController {
 		hashmap.put("quantity", Integer.valueOf(order.getQuantity()));
 		hashmap.put("amount", order.getAmount());
 		hashmap.put("orderItems", hashmap1);
-		hashmap.put("message", IIIlllII);
+		hashmap.put("message", SUCCESS);
 		return hashmap;
 	}
 
@@ -576,7 +576,7 @@ public class OrderController extends BaseController {
 		order.setShippings(order1.getShippings());
 		order.setReturns(order1.getReturns());
 		IIlIIIII.update(order, admin);
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:list.jhtml";
 	}
 
@@ -607,6 +607,6 @@ public class OrderController extends BaseController {
 			}
 			this.IIlIIIII.delete(ids);
 		}
-		return IIIlllII;
+		return SUCCESS;
 	}
 }

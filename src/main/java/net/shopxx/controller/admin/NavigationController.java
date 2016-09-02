@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.Navigation;
-import net.shopxx.entity.Navigation.Position;
 import net.shopxx.service.ArticleCategoryService;
 import net.shopxx.service.NavigationService;
 import net.shopxx.service.ProductCategoryService;
@@ -42,7 +41,7 @@ public class NavigationController
       return "/admin/common/error";
     }
     this.IIIlllIl.save(navigation);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -63,7 +62,7 @@ public class NavigationController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(navigation);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -81,12 +80,16 @@ public class NavigationController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.NavigationController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.NavigationController
+
+ * JD-Core Version:    0.7.0.1
+
  */

@@ -7,9 +7,7 @@ import net.shopxx.Message;
 import net.shopxx.Pageable;
 
 import net.shopxx.entity.BaseEntity;
-import net.shopxx.entity.BaseEntity.Save;
 import net.shopxx.entity.MemberAttribute;
-import net.shopxx.entity.MemberAttribute.Type;
 import net.shopxx.service.MemberAttributeService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -66,7 +64,7 @@ public class MemberAttributeController extends BaseController {
 		}
 		memberAttribute.setPropertyIndex((Integer) localObject);
 		this.IIIlllIl.save(memberAttribute);
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:list.jhtml";
 	}
 
@@ -107,7 +105,7 @@ public class MemberAttributeController extends BaseController {
 		}
 		this.IIIlllIl.update(memberAttribute, new String[] { "type",
 				"propertyIndex" });
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:list.jhtml";
 	}
 
@@ -121,7 +119,7 @@ public class MemberAttributeController extends BaseController {
 	@ResponseBody
 	public Message delete(Long[] ids) {
 		this.IIIlllIl.delete(ids);
-		return IIIlllII;
+		return SUCCESS;
 	}
 }
 

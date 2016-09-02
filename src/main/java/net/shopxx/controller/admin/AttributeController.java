@@ -57,7 +57,7 @@ public class AttributeController
     {
       attribute.setPropertyIndex(null);
       this.IIIlllIl.save(attribute);
-      IIIllIlI(redirectAttributes, IIIlllII);
+      IIIllIlI(redirectAttributes, SUCCESS);
     }
     return "redirect:list.jhtml";
   }
@@ -86,7 +86,7 @@ public class AttributeController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(attribute, new String[] { "propertyIndex", "productCategory" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -102,12 +102,16 @@ public class AttributeController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.AttributeController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.AttributeController
+
+ * JD-Core Version:    0.7.0.1
+
  */

@@ -48,7 +48,7 @@ public class ProductCategoryController
     productCategory.setAttributes(null);
     productCategory.setPromotions(null);
     this.IIIlllIl.save(productCategory);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -83,7 +83,7 @@ public class ProductCategoryController
       }
     }
     this.IIIlllIl.update(productCategory, new String[] { "treePath", "grade", "children", "products", "parameterGroups", "attributes", "promotions" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -100,7 +100,7 @@ public class ProductCategoryController
   {
     ProductCategory localProductCategory = (ProductCategory)this.IIIlllIl.find(id);
     if (localProductCategory == null) {
-      return IIIllIll;
+      return ERROR;
     }
     Set localSet1 = localProductCategory.getChildren();
     if ((localSet1 != null) && (!localSet1.isEmpty())) {
@@ -111,12 +111,16 @@ public class ProductCategoryController
       return Message.error("admin.productCategory.deleteExistProductNotAllowed", new Object[0]);
     }
     this.IIIlllIl.delete(id);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.ProductCategoryController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.ProductCategoryController
+
+ * JD-Core Version:    0.7.0.1
+
  */

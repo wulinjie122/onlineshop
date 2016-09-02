@@ -2,20 +2,17 @@ package net.shopxx.controller.admin;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.GiftItem;
 import net.shopxx.entity.Product;
 import net.shopxx.entity.Promotion;
-import net.shopxx.entity.Promotion.Operator;
 import net.shopxx.service.BrandService;
 import net.shopxx.service.CouponService;
 import net.shopxx.service.MemberRankService;
@@ -150,7 +147,7 @@ public class PromotionController extends BaseController
       } else
       {
           IIIlllIl.save(promotion);
-          IIIllIlI(redirectAttributes, IIIlllII);
+          IIIllIlI(redirectAttributes, SUCCESS);
           return "redirect:list.jhtml";
       }
   }
@@ -206,7 +203,7 @@ public class PromotionController extends BaseController
       } else
       {
           IIIlllIl.update(promotion);
-          IIIllIlI(redirectAttributes, IIIlllII);
+          IIIllIlI(redirectAttributes, SUCCESS);
           return "redirect:list.jhtml";
       }
   }
@@ -223,6 +220,6 @@ public class PromotionController extends BaseController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }

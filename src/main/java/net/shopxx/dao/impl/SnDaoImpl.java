@@ -118,7 +118,7 @@ public class SnDaoImpl implements SnDao, InitializingBean
       if (this.IIIllllI > this.IIIlllIl)
       {
     	 //��ʱ�޸� wulinjie
-        //this.IIlIIIII = SnDaoImpl.entityManager(this.entityManager, this.IIIllIll);
+        //this.IIlIIIII = SnDaoImpl.entityManager(this.entityManager, this.getNotifyUrl);
         this.IIIllllI = (this.IIlIIIII == 0L ? 1 : 0);
         this.IIIlllll = (this.IIlIIIII * (this.IIIlllIl + 1));
       }

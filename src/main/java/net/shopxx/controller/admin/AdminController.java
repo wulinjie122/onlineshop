@@ -61,7 +61,7 @@ public class AdminController
     admin.setLoginIp(null);
     admin.setOrders(null);
     this.adminServiceImpl.save(admin);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -101,7 +101,7 @@ public class AdminController
       admin.setLockedDate(localAdmin.getLockedDate());
     }
     this.adminServiceImpl.update(admin, new String[] { "username", "loginDate", "loginIp", "orders" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -120,12 +120,16 @@ public class AdminController
       return Message.error("admin.common.deleteAllNotAllowed", new Object[0]);
     }
     this.adminServiceImpl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.AdminController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.AdminController
+
+ * JD-Core Version:    0.7.0.1
+
  */

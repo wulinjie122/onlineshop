@@ -38,7 +38,7 @@ public class DeliveryCenterController
     }
     deliveryCenter.setAreaName(null);
     this.IIIlllIl.save(deliveryCenter);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -57,7 +57,7 @@ public class DeliveryCenterController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(deliveryCenter, new String[] { "areaName" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -73,12 +73,16 @@ public class DeliveryCenterController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.DeliveryCenterController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.DeliveryCenterController
+
+ * JD-Core Version:    0.7.0.1
+
  */

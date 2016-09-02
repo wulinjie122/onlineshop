@@ -41,7 +41,7 @@ public class AreaController
     area.setOrders(null);
     area.setDeliveryCenters(null);
     this.IIIlllIl.save(area);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -59,7 +59,7 @@ public class AreaController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(area, new String[] { "fullName", "treePath", "parent", "children", "members", "receivers", "orders", "deliveryCenters" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -84,12 +84,16 @@ public class AreaController
   public Message delete(Long id)
   {
     this.IIIlllIl.delete(id);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.AreaController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.AreaController
+
+ * JD-Core Version:    0.7.0.1
+
  */

@@ -7,13 +7,13 @@
 	<meta name="copyright" content="SHOP++" />
 		<meta name="keywords" content="JackJones杰克琼斯男士立领拉链机车夹克B212121038" />
 		<meta name="description" content="JackJones杰克琼斯男士立领拉链机车夹克B212121038" />
-<link href="shopxx/resources/shop/css/common.css" rel="stylesheet" type="text/css" />
-<link href="shopxx/resources/shop/css/product.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.tools.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.jqzoom.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.validate.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/common.js"></script>
+<link href="/resources/shop/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/resources/shop/css/product.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/resources/shop/js/jquery.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jquery.jqzoom.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/resources/shop/js/common.js"></script>
 <script type="text/javascript">
 $().ready(function() {
 
@@ -48,10 +48,10 @@ $().ready(function() {
 	var $addConsultation = $("#addConsultation");
 	var barTop = $bar.offset().top;
 	var productMap = {};
-productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMap[149] = { path: "/product/content/201301/149.html", specificationValues: [ "28", "56" ] };	
+	productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMap[149] = { path: "/product/content/201301/149.html", specificationValues: [ "28", "56" ] };
 	// 锁定规格值
 	lockSpecificationValue();
-	
+
 	// 商品图片放大镜
 	$zoom.jqzoom({
 		zoomWidth: 368,
@@ -60,10 +60,10 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 		showPreload: false,
 		preloadImages: false
 	});
-	
+
 	// 商品缩略图滚动
 	$scrollable.scrollable();
-	
+
 	$thumbnail.hover(function() {
 		var $this = $(this);
 		if ($this.hasClass("current")) {
@@ -73,7 +73,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			$this.addClass("current").click();
 		}
 	});
-	
+
 	// 规格值选择
 	$specificationValue.click(function() {
 		var $this = $(this);
@@ -101,7 +101,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 		$specificationTitle.hide();
 		return false;
 	});
-	
+
 	// 锁定规格值
 	function lockSpecificationValue() {
 		var selectedIds = new Array();
@@ -133,7 +133,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			});
 		});
 	}
-	
+
 	// 判断是否包含
 	function contains(array, values) {
 		var contains = true;
@@ -145,7 +145,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 		}
 		return contains;
 	}
-	
+
 	// 到货通知
 	$addProductNotify.click(function() {
 			var specificationValueIds = new Array();
@@ -176,7 +176,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 		}
 		return false;
 	});
-	
+
 	// 到货通知表单验证
 	$productNotifyForm.validate({
 		rules: {
@@ -208,7 +208,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			});
 		}
 	});
-	
+
 	// 购买数量
 	$quantity.keypress(function(event) {
 		var key = event.keyCode ? event.keyCode : event.which;
@@ -218,7 +218,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			return false;
 		}
 	});
-	
+
 	// 增加购买数量
 	$increase.click(function() {
 		var quantity = $quantity.val();
@@ -228,7 +228,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			$quantity.val(1);
 		}
 	});
-	
+
 	// 减少购买数量
 	$decrease.click(function() {
 		var quantity = $quantity.val();
@@ -238,7 +238,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			$quantity.val(1);
 		}
 	});
-	
+
 	// 加入购物车
 	$addCart.click(function() {
 			var specificationValueIds = new Array();
@@ -265,7 +265,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			$.message("warn", "购买数量必须为正整数");
 		}
 	});
-	
+
 	// 添加商品收藏
 	$addFavorite.click(function() {
 		$.ajax({
@@ -279,7 +279,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 		});
 		return false;
 	});
-	
+
 	$window.scroll(function() {
 		var scrollTop = $(this).scrollTop();
 		if (scrollTop > barTop) {
@@ -310,7 +310,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			$bar.css({position: "absolute", top: barTop});
 		}
 	});
-	
+
 		// 发表商品评论
 		$addReview.click(function() {
 			if ($.checkLogin()) {
@@ -320,7 +320,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 				return false;
 			}
 		});
-	
+
 		// 发表商品咨询
 		$addConsultation.click(function() {
 			if ($.checkLogin()) {
@@ -330,7 +330,7 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 				return false;
 			}
 		});
-	
+
 	// 浏览记录
 	var historyProduct = getCookie("historyProduct");
 	var historyProductIds = historyProduct != null ? historyProduct.split(",") : new Array();
@@ -359,20 +359,20 @@ productMap[150] = { path: null, specificationValues: [ "28", "55" ] }; productMa
 			});
 		}
 	});
-	
+
 	// 清空浏览记录
 	$clearHistoryProduct.click(function() {
 		$historyProduct.empty();
 		$(this).text("暂无记录");
 		removeCookie("historyProduct", {path: "shopxx/"});
 	});
-	
+
 	// 点击数
 	$.ajax({
 		url: "shopxx/product/hits/150.jhtml",
 		type: "GET"
 	});
-	
+
 });
 </script>
 </head>

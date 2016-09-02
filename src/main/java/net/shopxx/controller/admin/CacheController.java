@@ -40,13 +40,17 @@ public class CacheController
   public String clear(RedirectAttributes redirectAttributes)
   {
     this.IIIlllIl.clear();
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:clear.jhtml";
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.CacheController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.CacheController
+
+ * JD-Core Version:    0.7.0.1
+
  */

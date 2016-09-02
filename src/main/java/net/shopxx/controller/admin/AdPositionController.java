@@ -33,7 +33,7 @@ public class AdPositionController
     }
     adPosition.setAds(null);
     this.IIIlllIl.save(adPosition);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -51,7 +51,7 @@ public class AdPositionController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(adPosition, new String[] { "ads" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -67,12 +67,16 @@ public class AdPositionController
   public Message delete(Long[] ids)
   {
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.AdPositionController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.AdPositionController
+
+ * JD-Core Version:    0.7.0.1
+
  */

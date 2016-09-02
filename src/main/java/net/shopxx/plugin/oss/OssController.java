@@ -37,7 +37,7 @@ public class OssController extends BaseController {
 			pluginconfig.setIsEnabled(Boolean.valueOf(false));
 			this.IIIllllI.save(pluginconfig);
 		}
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:/admin/storage_plugin/list.jhtml";
 	}
 
@@ -47,7 +47,7 @@ public class OssController extends BaseController {
 			PluginConfig localPluginConfig = this.IIIlllIl.getPluginConfig();
 			this.IIIllllI.delete(localPluginConfig);
 		}
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:/admin/storage_plugin/list.jhtml";
 	}
 
@@ -72,7 +72,7 @@ public class OssController extends BaseController {
 		localPluginConfig.setIsEnabled(isEnabled);
 		localPluginConfig.setOrder(order);
 		this.IIIllllI.update(localPluginConfig);
-		IIIllIlI(redirectAttributes, IIIlllII);
+		IIIllIlI(redirectAttributes, SUCCESS);
 		return "redirect:/admin/storage_plugin/list.jhtml";
 	}
 }

@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.PaymentMethod;
-import net.shopxx.entity.PaymentMethod.Type;
 import net.shopxx.service.PaymentMethodService;
 import net.shopxx.service.ShippingMethodService;
 import org.springframework.stereotype.Controller;
@@ -41,7 +40,7 @@ public class PaymentMethodController
     }
     paymentMethod.setOrders(null);
     this.IIIlllIl.save(paymentMethod);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -62,7 +61,7 @@ public class PaymentMethodController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(paymentMethod, new String[] { "orders" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -81,12 +80,16 @@ public class PaymentMethodController
       return Message.error("admin.common.deleteAllNotAllowed", new Object[0]);
     }
     this.IIIlllIl.delete(ids);
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.PaymentMethodController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.PaymentMethodController
+
+ * JD-Core Version:    0.7.0.1
+
  */

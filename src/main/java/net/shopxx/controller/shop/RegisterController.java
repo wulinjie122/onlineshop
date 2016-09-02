@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +18,11 @@ import net.shopxx.CommonAttributes;
 import net.shopxx.Message;
 import net.shopxx.Principal;
 import net.shopxx.Setting;
-import net.shopxx.Setting.CaptchaType;
 import net.shopxx.entity.Area;
 import net.shopxx.entity.BaseEntity;
 import net.shopxx.entity.Cart;
 import net.shopxx.entity.Member;
-import net.shopxx.entity.Member.Gender;
 import net.shopxx.entity.MemberAttribute;
-import net.shopxx.entity.MemberAttribute.Type;
 import net.shopxx.service.AreaService;
 import net.shopxx.service.CaptchaService;
 import net.shopxx.service.CartService;
@@ -53,11 +48,11 @@ public class RegisterController extends BaseController {
 	@Resource(name = "rsaServiceImpl")
 	private RSAService rsaService;
 	@Resource(name = "memberServiceImpl")
-	private MemberService IIIlllll;
+	private MemberService memberService;
 	@Resource(name = "memberRankServiceImpl")
-	private MemberRankService IIlIIIII;
+	private MemberRankService memberRankService;
 	@Resource(name = "memberAttributeServiceImpl")
-	private MemberAttributeService IIlIIIIl;
+	private MemberAttributeService memberAttributeService;
 	@Resource(name = "areaServiceImpl")
 	private AreaService IIlIIIlI;
 	@Resource(name = "cartServiceImpl")
@@ -69,8 +64,8 @@ public class RegisterController extends BaseController {
 		if (StringUtils.isEmpty(username)) {
 			return false;
 		}
-		return (!this.IIIlllll.usernameDisabled(username))
-				&& (!this.IIIlllll.usernameExists(username));
+		return (!this.memberService.usernameDisabled(username))
+				&& (!this.memberService.usernameExists(username));
 	}
 
 	@RequestMapping(value = { "/check_email" }, method = { org.springframework.web.bind.annotation.RequestMethod.GET })
@@ -79,7 +74,7 @@ public class RegisterController extends BaseController {
 		if (StringUtils.isEmpty(email)) {
 			return false;
 		}
-		return !this.IIIlllll.emailExists(email);
+		return !this.memberService.emailExists(email);
 	}
 
 	@RequestMapping(method = { org.springframework.web.bind.annotation.RequestMethod.GET })
@@ -129,16 +124,16 @@ public class RegisterController extends BaseController {
 						.intValue())) {
 			return Message.error("shop.common.invalid", new Object[0]);
 		}
-		if ((this.IIIlllll.usernameDisabled(username))
-				|| (this.IIIlllll.usernameExists(username))) {
+		if ((this.memberService.usernameDisabled(username))
+				|| (this.memberService.usernameExists(username))) {
 			return Message.error("shop.register.disabledExist", new Object[0]);
 		}
 		if ((!settings.getIsDuplicateEmail().booleanValue())
-				&& (this.IIIlllll.emailExists(email))) {
+				&& (this.memberService.emailExists(email))) {
 			return Message.error("shop.register.emailExist", new Object[0]);
 		}
 		Member localMember = new Member();
-		List localList = this.IIlIIIIl.findList();
+		List localList = this.memberService.findList();
 		Object localObject2 = localList.iterator();
 		Object localObject4;
 		while (((Iterator) localObject2).hasNext()) {
@@ -215,9 +210,9 @@ public class RegisterController extends BaseController {
 		localMember.setLoginIp(request.getRemoteAddr());
 		localMember.setLoginDate(new Date());
 		localMember.setSafeKey(null);
-		localMember.setMemberRank(this.IIlIIIII.findDefault());
+		localMember.setMemberRank(this.memberRankService.findDefault());
 		localMember.setFavoriteProducts(null);
-		this.IIIlllll.save(localMember);
+		this.memberService.save(localMember);
 		Object localObject1 = this.IIlIIIll.getCurrent();
 		if ((localObject1 != null)
 				&& (((Cart) localObject1).getMember() == null)) {
@@ -247,12 +242,3 @@ public class RegisterController extends BaseController {
 		return Message.success("shop.register.success", new Object[0]);
 	}
 }
-
-/*
- * Location: D:\workspace\shopxx\WEB-INF\classes\
- * 
- * Qualified Name: net.shopxx.controller.shop.RegisterController
- * 
- * JD-Core Version: 0.7.0.1
- * 
- */

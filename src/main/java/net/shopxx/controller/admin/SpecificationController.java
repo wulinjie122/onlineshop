@@ -1,13 +1,10 @@
 package net.shopxx.controller.admin;
 
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 import javax.annotation.Resource;
 import net.shopxx.Message;
 import net.shopxx.Pageable;
 import net.shopxx.entity.Specification;
-import net.shopxx.entity.Specification.Type;
 import net.shopxx.entity.SpecificationValue;
 import net.shopxx.service.SpecificationService;
 import org.springframework.stereotype.Controller;
@@ -55,7 +52,7 @@ public class SpecificationController
     }
     specification.setProducts(null);
     this.IIIlllIl.save(specification);
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -90,7 +87,7 @@ public class SpecificationController
       return "/admin/common/error";
     }
     this.IIIlllIl.update(specification, new String[] { "products" });
-    IIIllIlI(redirectAttributes, IIIlllII);
+    IIIllIlI(redirectAttributes, SUCCESS);
     return "redirect:list.jhtml";
   }
   
@@ -116,12 +113,16 @@ public class SpecificationController
       }
       this.IIIlllIl.delete(ids);
     }
-    return IIIlllII;
+    return SUCCESS;
   }
 }
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.controller.admin.SpecificationController
- * JD-Core Version:    0.7.0.1
+
+
+/* Location:           D:\workspace\shopxx\WEB-INF\classes\
+
+ * Qualified Name:     net.shopxx.controller.admin.SpecificationController
+
+ * JD-Core Version:    0.7.0.1
+
  */

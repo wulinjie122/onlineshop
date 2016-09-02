@@ -3,57 +3,48 @@ package net.shopxx.listener;
 import java.io.File;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+
 import net.shopxx.service.CacheService;
 import net.shopxx.service.SearchService;
 import net.shopxx.service.StaticService;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
 @Component("initListener")
-public class InitListener
-  implements ApplicationListener<ContextRefreshedEvent>, ServletContextAware
-{
-  private static final String IIIllIlI = "/install_init.conf";
-  private ServletContext IIIllIll;
-  @Resource(name="staticServiceImpl")
-  private StaticService IIIlllII;
-  @Resource(name="cacheServiceImpl")
-  private CacheService IIIlllIl;
-  @Resource(name="searchServiceImpl")
-  private SearchService IIIllllI;
-  
-  public void setServletContext(ServletContext servletContext)
-  {
-    this.IIIllIll = servletContext;
-  }
-  
-  public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent)
-  {
-    if ((this.IIIllIll != null) && (contextRefreshedEvent.getApplicationContext().getParent() == null))
-    {
-      File localFile = new File(this.IIIllIll.getRealPath("/install_init.conf"));
-      if (localFile.exists())
-      {
-        this.IIIlllIl.clear();
-        this.IIIlllII.buildAll();
-        this.IIIllllI.purge();
-        this.IIIllllI.index();
-        localFile.delete();
-      }
-      else
-      {
-        this.IIIlllII.buildIndex();
-        this.IIIlllII.buildOther();
-      }
-    }
-  }
-}
+public class InitListener implements ApplicationListener<ContextRefreshedEvent>, ServletContextAware {
 
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.listener.InitListener
- * JD-Core Version:    0.7.0.1
- */
+    private static final String IIIllIlI = "/intall_init.conf";
+
+    private ServletContext servletContext;
+
+    @Resource(name = "staticServiceImpl")
+    private StaticService staticService;
+
+    @Resource(name = "cacheServiceImpl")
+    private CacheService cacheService;
+
+    @Resource(name = "searchServiceImpl")
+    private SearchService searchService;
+
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
+
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        if ((this.servletContext != null) && (contextRefreshedEvent.getApplicationContext().getParent() == null)) {
+            File file = new File(this.servletContext.getRealPath("/install_init.conf"));
+            if (file.exists()) {
+                this.cacheService.clear();
+                this.staticService.buildAll();
+                this.searchService.purge();
+                this.searchService.index();
+                file.delete();
+            } else {
+                this.staticService.buildIndex();
+                this.staticService.buildOther();
+            }
+        }
+    }
+}
