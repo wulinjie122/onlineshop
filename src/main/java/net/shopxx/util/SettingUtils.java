@@ -46,8 +46,7 @@ public final class SettingUtils {
 
 	public static Setting get() {
 		Ehcache ehcache = CACHEMANAGER.getEhcache("setting");
-		net.sf.ehcache.Element element = ehcache
-				.get(Setting.CACHE_KEY);
+		net.sf.ehcache.Element element = ehcache.get(Setting.CACHE_KEY);
 		Setting localSetting;
 		if (element != null) {
 			localSetting = (Setting) element.getObjectValue();
@@ -55,14 +54,13 @@ public final class SettingUtils {
 			localSetting = new Setting();
 			try {
 				File localFile = new ClassPathResource("/shopxx.xml").getFile();
-				Document localDocument = new SAXReader().read(localFile);
-				List localList = localDocument.selectNodes("/shopxx/setting");
-				Iterator localIterator = localList.iterator();
-				while (localIterator.hasNext()) {
-					org.dom4j.Element localElement1 = (org.dom4j.Element) localIterator
-							.next();
-					String str1 = localElement1.attributeValue("name");
-					String str2 = localElement1.attributeValue("value");
+				Document document = new SAXReader().read(localFile);
+				List list = document.selectNodes("/shopxx/setting");
+				Iterator iterator = list.iterator();
+				while (iterator.hasNext()) {
+					org.dom4j.Element element1 = (org.dom4j.Element) iterator.next();
+					String str1 = element1.attributeValue("name");
+					String str2 = element1.attributeValue("value");
 					try {
 						BEANUTILS.setProperty(localSetting, str1, str2);
 					} catch (IllegalAccessException localIllegalAccessException) {
@@ -74,8 +72,7 @@ public final class SettingUtils {
 			} catch (Exception localException) {
 				localException.printStackTrace();
 			}
-			ehcache.put(new net.sf.ehcache.Element(Setting.CACHE_KEY,
-					localSetting));
+			ehcache.put(new net.sf.ehcache.Element(Setting.CACHE_KEY, localSetting));
 		}
 		return localSetting;
 	}

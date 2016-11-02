@@ -7,10 +7,10 @@
 	<meta name="copyright" content="SHOP++" />
 		<meta name="keywords" content="配送方式" />
 		<meta name="description" content="配送方式" />
-<link href="shopxx/resources/shop/css/common.css" rel="stylesheet" type="text/css" />
-<link href="shopxx/resources/shop/css/article.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/common.js"></script>
+<link href="/shopxx/resources/shop/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/shopxx/resources/shop/css/article.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/shopxx/resources/shop/js/jquery.js"></script>
+<script type="text/javascript" src="/shopxx/resources/shop/js/common.js"></script>
 <script type="text/javascript">
 $().ready(function() {
 
@@ -18,7 +18,7 @@ $().ready(function() {
 
 	// 查看点击数
 	$.ajax({
-		url: "shopxx/article/hits/10.jhtml",
+		url: "/shopxx/article/hits/10.jhtml",
 		type: "GET",
 		success: function(data) {
 			$hits.text(data);
@@ -72,8 +72,8 @@ $().ready(function() {
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
-			<a href="shopxx/">
-				<img src="//upload/image/logo.gif" alt="SHOP++商城" />
+			<a href="/shopxx/">
+				<img src="/upload/image/logo.gif" alt="OnlineShop商城" />
 			</a>
 		</div>
 	</div>
@@ -85,31 +85,31 @@ $().ready(function() {
 		<div class="topNav clearfix">
 			<ul>
 				<li id="headerLogin" class="headerLogin">
-					<a href="shopxx/login.jhtml">登录</a>|
+					<a href="/shopxx/login.jhtml">登录</a>|
 				</li>
 				<li id="headerRegister" class="headerRegister">
-					<a href="shopxx/register.jhtml">注册</a>|
+					<a href="/shopxx/register.jhtml">注册</a>|
 				</li>
 				<li id="headerUsername" class="headerUsername"></li>
 				<li id="headerLogout" class="headerLogout">
-					<a href="shopxx/logout.jhtml">[退出]</a>|
+					<a href="/shopxx/logout.jhtml">[退出]</a>|
 				</li>
 						<li>
-							<a href="/shopxx/member/index.jhtml">会员中心</a>
+							<a href="/member/index.jhtml">会员中心</a>
 							|
 						</li>
 						<li>
-							<a href="/shopxx/article/list/3.jhtml">购物指南</a>
+							<a href="/article/list/3.jhtml">购物指南</a>
 							|
 						</li>
 						<li>
-							<a href="/shopxx/article/list/7.jhtml">关于我们</a>
+							<a href="/article/list/7.jhtml">关于我们</a>
 							
 						</li>
 			</ul>
 		</div>
 		<div class="cart">
-			<a href="shopxx/cart/list.jhtml">购物车</a>
+			<a href="/shopxx/cart/list.jhtml">购物车</a>
 		</div>
 			<div class="phone">
 				客服热线:
@@ -119,35 +119,35 @@ $().ready(function() {
 	<div class="span24">
 		<ul class="mainNav">
 					<li>
-						<a href="/shopxx/">首页</a>
+						<a href="/">首页</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/1.jhtml">时尚女装</a>
+						<a href="/product/list/1.jhtml">时尚女装</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/2.jhtml">精品男装</a>
+						<a href="/product/list/2.jhtml">精品男装</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/3.jhtml">精致内衣</a>
+						<a href="/product/list/3.jhtml">精致内衣</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/4.jhtml">服饰配件</a>
+						<a href="/product/list/4.jhtml">服饰配件</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/5.jhtml">时尚女鞋</a>
+						<a href="/product/list/5.jhtml">时尚女鞋</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/6.jhtml">流行男鞋</a>
+						<a href="/product/list/6.jhtml">流行男鞋</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/9.jhtml">童装童鞋</a>
+						<a href="/product/list/9.jhtml">童装童鞋</a>
 						
 					</li>
 		</ul>
@@ -156,26 +156,26 @@ $().ready(function() {
 		<div class="tagWrap">
 			<ul class="tag">
 						<li class="icon" style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/hot.gif) right no-repeat;">
-							<a href="shopxx/product/list.jhtml?tagIds=1">热销</a>
+							<a href="/shopxx/product/list.jhtml?tagIds=1">热销</a>
 						</li>
 						<li class="icon" style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/new.gif) right no-repeat;">
-							<a href="shopxx/product/list.jhtml?tagIds=2">最新</a>
+							<a href="/shopxx/product/list.jhtml?tagIds=2">最新</a>
 						</li>
 			</ul>
 			<div class="hotSearch">
 					热门搜索:
-						<a href="shopxx/product/search.jhtml?keyword=T%E6%81%A4">T恤</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E8%A1%AC%E8%A1%AB">衬衫</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E8%A5%BF%E6%9C%8D">西服</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E8%A5%BF%E8%A3%A4">西裤</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E6%A3%AE%E9%A9%AC">森马</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E4%B8%83%E5%8C%B9%E7%8B%BC">七匹狼</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E6%A2%B5%E5%B8%8C%E8%94%93">梵希蔓</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E6%98%A5%E5%A4%8F%E6%96%B0%E6%AC%BE">春夏新款</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E7%89%9B%E4%BB%94%E8%A3%A4">牛仔裤</a>
+						<a href="/shopxx/product/search.jhtml?keyword=T%E6%81%A4">T恤</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E8%A1%AC%E8%A1%AB">衬衫</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E8%A5%BF%E6%9C%8D">西服</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E8%A5%BF%E8%A3%A4">西裤</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E6%A3%AE%E9%A9%AC">森马</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E4%B8%83%E5%8C%B9%E7%8B%BC">七匹狼</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E6%A2%B5%E5%B8%8C%E8%94%93">梵希蔓</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E6%98%A5%E5%A4%8F%E6%96%B0%E6%AC%BE">春夏新款</a>
+						<a href="/shopxx/product/search.jhtml?keyword=%E7%89%9B%E4%BB%94%E8%A3%A4">牛仔裤</a>
 			</div>
 			<div class="search">
-				<form id="productSearchForm" action="shopxx/product/search.jhtml" method="get">
+				<form id="productSearchForm" action="/shopxx/product/search.jhtml" method="get">
 					<input name="keyword" class="keyword" value="商品搜索" maxlength="30" />
 					<button type="submit">搜索</button>
 				</form>
@@ -188,37 +188,37 @@ $().ready(function() {
 				<div class="title">热点分类</div>
 						<dl>
 							<dt>
-								<a href="shopxx/article/list/1.jhtml">商城动态</a>
+								<a href="/shopxx/article/list/1.jhtml">商城动态</a>
 							</dt>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/article/list/2.jhtml">活动促销</a>
+								<a href="/shopxx/article/list/2.jhtml">活动促销</a>
 							</dt>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/article/list/3.jhtml">购物指南</a>
+								<a href="/shopxx/article/list/3.jhtml">购物指南</a>
 							</dt>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/article/list/4.jhtml">支付方式</a>
+								<a href="/shopxx/article/list/4.jhtml">支付方式</a>
 							</dt>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/article/list/5.jhtml">配送方式</a>
+								<a href="/shopxx/article/list/5.jhtml">配送方式</a>
 							</dt>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/article/list/6.jhtml">售后服务</a>
+								<a href="/shopxx/article/list/6.jhtml">售后服务</a>
 							</dt>
 						</dl>
 						<dl class="last">
 							<dt>
-								<a href="shopxx/article/list/7.jhtml">关于我们</a>
+								<a href="/shopxx/article/list/7.jhtml">关于我们</a>
 							</dt>
 						</dl>
 			</div>
@@ -226,34 +226,34 @@ $().ready(function() {
 				<div class="title">热点文章</div>
 				<ul>
 							<li>
-								<a href="shopxx/article/content/201301/1/1.html" title="购物流程">购物流程</a>
+								<a href="/shopxx/article/content/201301/1/1.html" title="购物流程">购物流程</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/2/1.html" title="会员等级">会员等级</a>
+								<a href="/shopxx/article/content/201301/2/1.html" title="会员等级">会员等级</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/5/1.html" title="退换货政策">退换货政策</a>
+								<a href="/shopxx/article/content/201301/5/1.html" title="退换货政策">退换货政策</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/7/1.html" title="货到付款">货到付款</a>
+								<a href="/shopxx/article/content/201301/7/1.html" title="货到付款">货到付款</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/3/1.html" title="新用户注册">新用户注册</a>
+								<a href="/shopxx/article/content/201301/3/1.html" title="新用户注册">新用户注册</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/4/1.html" title="预存款支付">预存款支付</a>
+								<a href="/shopxx/article/content/201301/4/1.html" title="预存款支付">预存款支付</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/14/1.html" title="会员积分">会员积分</a>
+								<a href="/shopxx/article/content/201301/14/1.html" title="会员积分">会员积分</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/8/1.html" title="服务理念">服务理念</a>
+								<a href="/shopxx/article/content/201301/8/1.html" title="服务理念">服务理念</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/18/1.html" title="防骗提示">防骗提示</a>
+								<a href="/shopxx/article/content/201301/18/1.html" title="防骗提示">防骗提示</a>
 							</li>
 							<li>
-								<a href="shopxx/article/content/201301/6/1.html" title="发票制度">发票制度</a>
+								<a href="/shopxx/article/content/201301/6/1.html" title="发票制度">发票制度</a>
 							</li>
 				</ul>
 			</div>
@@ -262,10 +262,10 @@ $().ready(function() {
 			<div class="path">
 				<ul>
 					<li>
-						<a href="shopxx/">首页</a>
+						<a href="/shopxx/">首页</a>
 					</li>
 					<li>
-						<a href="shopxx/article/list/3.jhtml">购物指南</a>
+						<a href="/shopxx/article/list/3.jhtml">购物指南</a>
 					</li>
 				</ul>
 			</div>
@@ -304,15 +304,15 @@ $().ready(function() {
 						|
 					</li>
 					<li>
-						<a href="/shopxx/friend_link.jhtml">友情链接</a>
+						<a href="/friend_link.jhtml">友情链接</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/article/list/4.jhtml" target="_blank">支付方式</a>
+						<a href="/article/list/4.jhtml" target="_blank">支付方式</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/article/list/5.jhtml" target="_blank">配送方式</a>
+						<a href="/article/list/5.jhtml" target="_blank">配送方式</a>
 						|
 					</li>
 					<li>
@@ -326,7 +326,7 @@ $().ready(function() {
 		</ul>
 	</div>
 	<div class="span24">
-		<div class="copyright">Copyright © 2005-2013 SHOP++商城 版权所有</div>
+		<div class="copyright">Copyright © 2005-2013 OnlineShop商城 版权所有</div>
 	</div>
 </div></body>
 </html>

@@ -580,14 +580,14 @@ public class Order extends BaseEntity{
 
     @Transient
     public BigDecimal calculateTax() {
-        Setting localSetting = SettingUtils.get();
-        BigDecimal localBigDecimal;
-        if (localSetting.getIsTaxPriceEnabled().booleanValue()) {
-            localBigDecimal = getPrice().subtract(getDiscount()).multiply(new BigDecimal(localSetting.getTaxRate().toString()));
+        Setting setting = SettingUtils.get();
+        BigDecimal scale;
+        if (setting.getIsTaxPriceEnabled().booleanValue()) {
+            scale = getPrice().subtract(getDiscount()).multiply(new BigDecimal(setting.getTaxRate().toString()));
         } else {
-            localBigDecimal = new BigDecimal(0);
+            scale = new BigDecimal(0);
         }
-        return localSetting.setScale(localBigDecimal);
+        return setting.setScale(scale);
     }
 
     @PrePersist

@@ -7,7 +7,7 @@
 <meta name="copyright" content="SHOP++" />
 </head>
 <body onload="javascript: document.forms[0].submit();">
-	<form action="${url}" method="${method}">
+	<form actiona="${url}" method="${method}">
 		[#list parameterMap.entrySet() as entry]
 			<input type="hidden" name="${entry.key}" value="${entry.value}" />
 		[/#list]

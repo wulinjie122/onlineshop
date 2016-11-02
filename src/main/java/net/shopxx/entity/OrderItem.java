@@ -29,7 +29,7 @@ public class OrderItem
   private String IIIlllll;
   private Boolean IIlIIIII;
   private Integer IIlIIIIl;
-  private Integer IIlIIIlI;
+  private Integer shippedQuantity;
   private Integer IIlIIIll;
   private Product IIlIIlII;
   private Order IIlIIlIl;
@@ -140,12 +140,12 @@ public class OrderItem
   @Column(nullable=false)
   public Integer getShippedQuantity()
   {
-    return this.IIlIIIlI;
+    return this.shippedQuantity;
   }
   
   public void setShippedQuantity(Integer shippedQuantity)
   {
-    this.IIlIIIlI = shippedQuantity;
+    this.shippedQuantity = shippedQuantity;
   }
   
   @Column(nullable=false)
@@ -202,9 +202,3 @@ public class OrderItem
     return new BigDecimal(0);
   }
 }
-
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
- * Qualified Name:     net.shopxx.entity.OrderItem
- * JD-Core Version:    0.7.0.1
- */

@@ -50,13 +50,3 @@ public class PaymentController
     return SUCCESS;
   }
 }
-
-
-
-/* Location:           D:\workspace\shopxx\WEB-INF\classes\
-
- * Qualified Name:     net.shopxx.controller.admin.PaymentController
-
- * JD-Core Version:    0.7.0.1
-
- */

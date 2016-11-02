@@ -10,148 +10,126 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name="xx_refunds")
-public class Refunds
-  extends BaseEntity
-{
-  private static final long serialVersionUID = 354885216604823632L;
-  private String IIIllIlI;
-  private Refunds.Type IIIllIll;
-  private String IIIlllII;
-  private String IIIlllIl;
-  private String IIIllllI;
-  private BigDecimal IIIlllll;
-  private String IIlIIIII;
-  private String IIlIIIIl;
-  private String IIlIIIlI;
-  private Order IIlIIIll;
-  
-  @Column(nullable=false, updatable=false, unique=true)
-  public String getSn()
-  {
-    return this.IIIllIlI;
-  }
-  
-  public void setSn(String sn)
-  {
-    this.IIIllIlI = sn;
-  }
-  
-  @NotNull
-  @Column(nullable=false, updatable=false)
-  public Refunds.Type getType()
-  {
-    return this.IIIllIll;
-  }
-  
-  public void setType(Refunds.Type type)
-  {
-    this.IIIllIll = type;
-  }
-  
-  @Column(updatable=false)
-  public String getPaymentMethod()
-  {
-    return this.IIIlllII;
-  }
-  
-  public void setPaymentMethod(String paymentMethod)
-  {
-    this.IIIlllII = paymentMethod;
-  }
-  
-  @Length(max=200)
-  @Column(updatable=false)
-  public String getBank()
-  {
-    return this.IIIlllIl;
-  }
-  
-  public void setBank(String bank)
-  {
-    this.IIIlllIl = bank;
-  }
-  
-  @Length(max=200)
-  @Column(updatable=false)
-  public String getAccount()
-  {
-    return this.IIIllllI;
-  }
-  
-  public void setAccount(String account)
-  {
-    this.IIIllllI = account;
-  }
-  
-  @NotNull
-  @Min(0L)
-  @Digits(integer=12, fraction=3)
-  @Column(nullable=false, updatable=false, precision=21, scale=6)
-  public BigDecimal getAmount()
-  {
-    return this.IIIlllll;
-  }
-  
-  public void setAmount(BigDecimal amount)
-  {
-    this.IIIlllll = amount;
-  }
-  
-  @Length(max=200)
-  @Column(updatable=false)
-  public String getPayee()
-  {
-    return this.IIlIIIII;
-  }
-  
-  public void setPayee(String payee)
-  {
-    this.IIlIIIII = payee;
-  }
-  
-  @Column(nullable=false, updatable=false)
-  public String getOperator()
-  {
-    return this.IIlIIIIl;
-  }
-  
-  public void setOperator(String operator)
-  {
-    this.IIlIIIIl = operator;
-  }
-  
-  @Length(max=200)
-  @Column(updatable=false)
-  public String getMemo()
-  {
-    return this.IIlIIIlI;
-  }
-  
-  public void setMemo(String memo)
-  {
-    this.IIlIIIlI = memo;
-  }
-  
-  @NotNull
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="orders", nullable=false, updatable=false)
-  public Order getOrder()
-  {
-    return this.IIlIIIll;
-  }
-  
-  public void setOrder(Order order)
-  {
-    this.IIlIIIll = order;
-  }
-  
-  public enum Type
-  {
-    online,  offline,  deposit;
-  }
-  
+@Table(name = "xx_refunds")
+public class Refunds extends BaseEntity {
+    private static final long serialVersionUID = 354885216604823632L;
+    private String sn;
+    private Refunds.Type type;
+    private String paymentMethod;
+    private String bank;
+    private String account;
+    private BigDecimal amount;
+    private String payee;
+    private String operator;
+    private String memo;
+    private Order order;
+
+    @Column(nullable = false, updatable = false, unique = true)
+    public String getSn() {
+        return this.sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
+    @NotNull
+    @Column(nullable = false, updatable = false)
+    public Refunds.Type getType() {
+        return this.type;
+    }
+
+    public void setType(Refunds.Type type) {
+        this.type = type;
+    }
+
+    @Column(updatable = false)
+    public String getPaymentMethod() {
+        return this.paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    @Length(max = 200)
+    @Column(updatable = false)
+    public String getBank() {
+        return this.bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    @Length(max = 200)
+    @Column(updatable = false)
+    public String getAccount() {
+        return this.account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    @NotNull
+    @Min(0L)
+    @Digits(integer = 12, fraction = 3)
+    @Column(nullable = false, updatable = false, precision = 21, scale = 6)
+    public BigDecimal getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    @Length(max = 200)
+    @Column(updatable = false)
+    public String getPayee() {
+        return this.payee;
+    }
+
+    public void setPayee(String payee) {
+        this.payee = payee;
+    }
+
+    @Column(nullable = false, updatable = false)
+    public String getOperator() {
+        return this.operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    @Length(max = 200)
+    @Column(updatable = false)
+    public String getMemo() {
+        return this.memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orders", nullable = false, updatable = false)
+    public Order getOrder() {
+        return this.order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public enum Type {
+        online, offline, deposit;
+    }
+
 }

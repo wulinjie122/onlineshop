@@ -72,8 +72,8 @@ public abstract class PaymentPlugin implements Comparable<PaymentPlugin> {
     }
 
     public PaymentPlugin.FeeType getFeeType() {
-        PluginConfig localPluginConfig = getPluginConfig();
-        return localPluginConfig != null ? PaymentPlugin.FeeType.valueOf(localPluginConfig.getAttribute("feeType")) : null;
+        PluginConfig pluginConfig = getPluginConfig();
+        return pluginConfig != null ? PaymentPlugin.FeeType.valueOf(pluginConfig.getAttribute("feeType")) : null;
     }
 
     public BigDecimal getFee() {
@@ -97,7 +97,7 @@ public abstract class PaymentPlugin implements Comparable<PaymentPlugin> {
 
     public abstract Integer getTimeout();
 
-    public abstract Map<String, String> getParameterMap(String paramString1, BigDecimal paramBigDecimal, String paramString2, HttpServletRequest paramHttpServletRequest);
+    public abstract Map<String, String> getParameterMap(String sn, BigDecimal amount, String paramString2, HttpServletRequest paramHttpServletRequest);
 
     public abstract boolean verify(String paramString, HttpServletRequest request);
 
@@ -116,14 +116,14 @@ public abstract class PaymentPlugin implements Comparable<PaymentPlugin> {
     }
 
     public final BigDecimal getFee(BigDecimal amount) {
-        Setting localSetting = SettingUtils.get();
-        BigDecimal localBigDecimal;
+        Setting setting = SettingUtils.get();
+        BigDecimal decimal;
         if (getFeeType() == PaymentPlugin.FeeType.scale) {
-            localBigDecimal = amount.multiply(getFee());
+            decimal = amount.multiply(getFee());
         } else {
-            localBigDecimal = getFee();
+            decimal = getFee();
         }
-        return localSetting.setScale(localBigDecimal);
+        return setting.setScale(decimal);
     }
 
     public boolean equals(Object obj) {

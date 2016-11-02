@@ -8,7 +8,7 @@
  */
 
 var shopxx = {
-	base: "",
+	base: "/shopxx",
 	locale: "zh_CN"
 };
 

@@ -60,14 +60,15 @@ public class PaymentController extends BaseController {
             return "/shop/common/error";
         }
         BigDecimal fee = paymentPlugin.getFee(order.getAmountPayable());
-        BigDecimal localBigDecimal2 = order.getAmountPayable().add(fee);
+        BigDecimal amount = order.getAmountPayable().add(fee);
+        //新建支付
         Payment payment = new Payment();
         payment.setSn(this.snService.generate(Sn.Type.payment));
         payment.setType(Payment.Type.online);
         payment.setStatus(Payment.Status.wait);
         payment.setPaymentMethod(order.getPaymentMethodName() + "-" + paymentPlugin.getPaymentName());
         payment.setFee(fee);
-        payment.setAmount(localBigDecimal2);
+        payment.setAmount(amount);
         payment.setPaymentPluginId(paymentPluginId);
         payment.setExpire(paymentPlugin.getTimeout() != null ? DateUtils.addMinutes(new Date(), paymentPlugin.getTimeout().intValue()) : null);
         payment.setMember(null);
@@ -75,7 +76,7 @@ public class PaymentController extends BaseController {
         this.paymentService.save(payment);
         model.addAttribute("url", paymentPlugin.getUrl());
         model.addAttribute("method", paymentPlugin.getMethod());
-        model.addAttribute("parameterMap", paymentPlugin.getParameterMap(payment.getSn(), localBigDecimal2, order.getProductName(), request));
+        model.addAttribute("parameterMap", paymentPlugin.getParameterMap(payment.getSn(), amount, order.getProductName(), request));
         return "shop/payment/submit";
     }
 
@@ -123,11 +124,11 @@ public class PaymentController extends BaseController {
             PaymentPlugin paymentPlugin = this.pluginService.getPaymentPlugin(payment.getPaymentPluginId());
             if (paymentPlugin != null) {
                 if ((payment.getStatus() == Payment.Status.wait) && (paymentPlugin.verify(sn, request))) {
-                    BigDecimal localBigDecimal1 = paymentPlugin.getAmount(sn, request);
-                    if (localBigDecimal1.compareTo(payment.getAmount()) >= 0) {
+                    BigDecimal amount = paymentPlugin.getAmount(sn, request);
+                    if (amount.compareTo(payment.getAmount()) >= 0) {
                         Order order = payment.getOrder();
                         if (order != null) {
-                            if (localBigDecimal1.compareTo(order.getAmountPayable()) >= 0) {
+                            if (amount.compareTo(order.getAmountPayable()) >= 0) {
                                 this.orderService.payment(order, payment, null);
                             }
                         } else {
@@ -139,7 +140,7 @@ public class PaymentController extends BaseController {
                         }
                     }
                     payment.setStatus(Payment.Status.success);
-                    payment.setAmount(localBigDecimal1);
+                    payment.setAmount(amount);
                     payment.setPaymentDate(new Date());
                     this.paymentService.update(payment);
                 }

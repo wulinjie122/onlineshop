@@ -30,25 +30,25 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 @Service("staticServiceImpl")
-public class StaticServiceImpl
-        implements StaticService, ServletContextAware {
+public class StaticServiceImpl implements StaticService, ServletContextAware {
+
     private static final Integer IIIllIlI = Integer.valueOf(40000);
-    private ServletContext IIIllIll;
+    private ServletContext servletContext;
     @Resource(name = "freeMarkerConfigurer")
-    private FreeMarkerConfigurer IIIlllII;
+    private FreeMarkerConfigurer freeMarkerConfigurer;
     @Resource(name = "templateServiceImpl")
     private TemplateService templateService;
     @Resource(name = "articleDaoImpl")
-    private ArticleDao IIIllllI;
+    private ArticleDao articleDao;
     @Resource(name = "productDaoImpl")
-    private ProductDao IIIlllll;
+    private ProductDao productDao;
     @Resource(name = "brandDaoImpl")
-    private BrandDao IIlIIIII;
+    private BrandDao brandDao;
     @Resource(name = "promotionDaoImpl")
-    private PromotionDao IIlIIIIl;
+    private PromotionDao promotionDao;
 
     public void setServletContext(ServletContext servletContext) {
-        this.IIIllIll = servletContext;
+        this.servletContext = servletContext;
     }
 
     @Transactional(readOnly = true)
@@ -59,8 +59,8 @@ public class StaticServiceImpl
         OutputStreamWriter localOutputStreamWriter = null;
         BufferedWriter localBufferedWriter = null;
         try {
-            freemarker.template.Template localTemplate = this.IIIlllII.getConfiguration().getTemplate(templatePath);
-            File localFile1 = new File(this.IIIllIll.getRealPath(staticPath));
+            freemarker.template.Template localTemplate = this.freeMarkerConfigurer.getConfiguration().getTemplate(templatePath);
+            File localFile1 = new File(this.servletContext.getRealPath(staticPath));
             File localFile2 = localFile1.getParentFile();
             if (!localFile2.exists()) {
                 localFile2.mkdirs();
@@ -106,6 +106,7 @@ public class StaticServiceImpl
 
     @Transactional(readOnly = true)
     public int build(Product product) {
+        // 创建报表
         Assert.notNull(product);
         delete(product);
         net.shopxx.Template localTemplate = this.templateService.get("productContent");
@@ -142,7 +143,7 @@ public class StaticServiceImpl
                 String str2 = FreemarkerUtils.process(localTemplate2.getStaticPath(), localHashMap);
                 List localList;
                 if (j == 0) {
-                    localList = this.IIIllllI.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
+                    localList = this.articleDao.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
                     localHashMap.put("articles", localList);
                     if (localList.size() < n) {
                         j++;
@@ -150,8 +151,8 @@ public class StaticServiceImpl
                         n -= localList.size();
                     } else {
                         i += build(str1, str2, localHashMap);
-                        this.IIIllllI.clear();
-                        this.IIIllllI.flush();
+                        this.articleDao.clear();
+                        this.articleDao.flush();
                         localArrayList.add(str2);
                         localHashMap.clear();
                         k++;
@@ -159,7 +160,7 @@ public class StaticServiceImpl
                         n = IIIllIlI.intValue();
                     }
                 } else if (j == 1) {
-                    localList = this.IIIlllll.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
+                    localList = this.productDao.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
                     localHashMap.put("products", localList);
                     if (localList.size() < n) {
                         j++;
@@ -167,8 +168,8 @@ public class StaticServiceImpl
                         n -= localList.size();
                     } else {
                         i += build(str1, str2, localHashMap);
-                        this.IIIlllll.clear();
-                        this.IIIlllll.flush();
+                        this.productDao.clear();
+                        this.productDao.flush();
                         localArrayList.add(str2);
                         localHashMap.clear();
                         k++;
@@ -176,7 +177,7 @@ public class StaticServiceImpl
                         n = IIIllIlI.intValue();
                     }
                 } else if (j == 2) {
-                    localList = this.IIlIIIII.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
+                    localList = this.brandDao.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
                     localHashMap.put("brands", localList);
                     if (localList.size() < n) {
                         j++;
@@ -184,8 +185,8 @@ public class StaticServiceImpl
                         n -= localList.size();
                     } else {
                         i += build(str1, str2, localHashMap);
-                        this.IIlIIIII.clear();
-                        this.IIlIIIII.flush();
+                        this.brandDao.clear();
+                        this.brandDao.flush();
                         localArrayList.add(str2);
                         localHashMap.clear();
                         k++;
@@ -193,11 +194,11 @@ public class StaticServiceImpl
                         n = IIIllIlI.intValue();
                     }
                 } else if (j == 3) {
-                    localList = this.IIlIIIIl.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
+                    localList = this.promotionDao.findList(Integer.valueOf(m), Integer.valueOf(n), null, null);
                     localHashMap.put("promotions", localList);
                     i += build(str1, str2, localHashMap);
-                    this.IIlIIIIl.clear();
-                    this.IIlIIIIl.flush();
+                    this.promotionDao.clear();
+                    this.promotionDao.flush();
                     localArrayList.add(str2);
                     if (localList.size() < n) {
                         localHashMap.put("staticPaths", localArrayList);
@@ -229,26 +230,23 @@ public class StaticServiceImpl
     @Transactional(readOnly = true)
     public int buildAll() {
         int i = 0;
-        List localList;
-        Iterator localIterator;
-        Object localObject;
-        for (int j = 0; j < this.IIIllllI.count(new Filter[0]); j += 20) {
-            localList = this.IIIllllI.findList(Integer.valueOf(j), Integer.valueOf(20), null, null);
-            localIterator = localList.iterator();
-            while (localIterator.hasNext()) {
-                localObject = (Article) localIterator.next();
-                i += build((Article) localObject);
+        for (int j = 0; j < this.articleDao.count(new Filter[0]); j += 20) {
+            List<Article> articleList = this.articleDao.findList(j, 20, null, null);
+            Iterator<Article> iterator = articleList.iterator();
+            while (iterator.hasNext()) {
+                Article article = (Article)iterator.next();
+                i += build(article);
             }
-            this.IIIllllI.clear();
+            this.articleDao.clear();
         }
-        for (int j = 0; j < this.IIIlllll.count(new Filter[0]); j += 20) {
-            localList = this.IIIlllll.findList(Integer.valueOf(j), Integer.valueOf(20), null, null);
-            localIterator = localList.iterator();
-            while (localIterator.hasNext()) {
-                localObject = (Product) localIterator.next();
-                i += build((Product) localObject);
+        for (int j = 0; j < this.productDao.count(new Filter[0]); j += 20) {
+            List<Product> products = this.productDao.findList(Integer.valueOf(j), Integer.valueOf(20), null, null);
+            Iterator<Product> productIterator = products.iterator();
+            while (productIterator.hasNext()) {
+                Product product = (Product) productIterator.next();
+                i += build(product);
             }
-            this.IIIlllll.clear();
+            this.productDao.clear();
         }
         buildIndex();
         buildSitemap();
@@ -259,7 +257,7 @@ public class StaticServiceImpl
     @Transactional(readOnly = true)
     public int delete(String staticPath) {
         Assert.hasText(staticPath);
-        File localFile = new File(this.IIIllIll.getRealPath(staticPath));
+        File localFile = new File(this.servletContext.getRealPath(staticPath));
         if (localFile.exists()) {
             localFile.delete();
             return 1;

@@ -7,13 +7,13 @@
 	<meta name="copyright" content="SHOP++" />
 		<meta name="keywords" content="JackJones杰克琼斯男士立领拼接式夹克I212121041" />
 		<meta name="description" content="JackJones杰克琼斯男士立领拼接式夹克I212121041" />
-<link href="shopxx/resources/shop/css/common.css" rel="stylesheet" type="text/css" />
-<link href="shopxx/resources/shop/css/product.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.tools.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.jqzoom.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/jquery.validate.js"></script>
-<script type="text/javascript" src="shopxx/resources/shop/js/common.js"></script>
+<link href="/resources/shop/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/resources/shop/css/product.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/resources/shop/js/jquery.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jquery.jqzoom.js"></script>
+<script type="text/javascript" src="/resources/shop/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/resources/shop/js/common.js"></script>
 <script type="text/javascript">
 $().ready(function() {
 
@@ -89,7 +89,7 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 		$.each(productMap, function(i, product) {
 			if (product.specificationValues.length == selectedIds.length && contains(product.specificationValues, selectedIds)) {
 				if (product.path != null) {
-					location.href = "shopxx" + product.path;
+					location.href = "" + product.path;
 					locked = false;
 				}
 				return false;
@@ -162,7 +162,7 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 			$productNotifyEmail.focus();
 			if ($.trim($productNotifyEmail.val()) == "") {
 				$.ajax({
-					url: "shopxx/product_notify/email.jhtml",
+					url: "/product_notify/email.jhtml",
 					type: "GET",
 					dataType: "json",
 					cache: false,
@@ -187,7 +187,7 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 		},
 		submitHandler: function(form) {
 			$.ajax({
-				url: "shopxx/product_notify/save.jhtml",
+				url: "/product_notify/save.jhtml",
 				type: "POST",
 				data: {productId: 165, email: $productNotifyEmail.val()},
 				dataType: "json",
@@ -252,7 +252,7 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 		var quantity = $quantity.val();
 		if (/^\d*[1-9]\d*$/.test(quantity) && parseInt(quantity) > 0) {
 			$.ajax({
-				url: "shopxx/cart/add.jhtml",
+				url: "/cart/add.jhtml",
 				type: "POST",
 				data: {id: 165, quantity: quantity},
 				dataType: "json",
@@ -269,7 +269,7 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 	// 添加商品收藏
 	$addFavorite.click(function() {
 		$.ajax({
-			url: "shopxx/member/favorite/add.jhtml?id=165",
+			url: "/member/favorite/add.jhtml?id=165",
 			type: "POST",
 			dataType: "json",
 			cache: false,
@@ -316,7 +316,7 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 			if ($.checkLogin()) {
 				return true;
 			} else {
-				$.redirectLogin("shopxx/review/add/165.jhtml", "必须登录后才能发表商品评论");
+				$.redirectLogin("/review/add/165.jhtml", "必须登录后才能发表商品评论");
 				return false;
 			}
 		});
@@ -326,7 +326,7 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 			if ($.checkLogin()) {
 				return true;
 			} else {
-				$.redirectLogin("shopxx/consultation/add/165.jhtml", "必须登录后才能发表商品咨询");
+				$.redirectLogin("/consultation/add/165.jhtml", "必须登录后才能发表商品咨询");
 				return false;
 			}
 		});
@@ -344,9 +344,9 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 	if (historyProductIds.length > 6) {
 		historyProductIds.pop();
 	}
-	addCookie("historyProduct", historyProductIds.join(","), {path: "shopxx/"});
+	addCookie("historyProduct", historyProductIds.join(","), {path: "/"});
 	$.ajax({
-		url: "shopxx/product/history.jhtml",
+		url: "/product/history.jhtml",
 		type: "GET",
 		data: {ids: historyProductIds},
 		dataType: "json",
@@ -354,8 +354,8 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 		cache: false,
 		success: function(data) {
 			$.each(data, function (index, product) {
-				var thumbnail = product.thumbnail != null ? product.thumbnail : "//upload/image/default_thumbnail.jpg";
-				$historyProduct.append('<li><img src="' + thumbnail + '" \/><a href="shopxx' + product.path + '">' + product.name + '<\/a><span>' + currency(product.price, true) + '<\/span><\/li>');
+				var thumbnail = product.thumbnail != null ? product.thumbnail : "/upload/image/default_thumbnail.jpg";
+				$historyProduct.append('<li><img src="' + thumbnail + '" \/><a href="' + product.path + '">' + product.name + '<\/a><span>' + currency(product.price, true) + '<\/span><\/li>');
 			});
 		}
 	});
@@ -364,12 +364,12 @@ productMap[165] = { path: null, specificationValues: [ "28", "53" ] }; productMa
 	$clearHistoryProduct.click(function() {
 		$historyProduct.empty();
 		$(this).text("暂无记录");
-		removeCookie("historyProduct", {path: "shopxx/"});
+		removeCookie("historyProduct", {path: "/"});
 	});
 	
 	// 点击数
 	$.ajax({
-		url: "shopxx/product/hits/165.jhtml",
+		url: "/product/hits/165.jhtml",
 		type: "GET"
 	});
 	
@@ -420,8 +420,8 @@ $().ready(function() {
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
-			<a href="shopxx/">
-				<img src="//upload/image/logo.gif" alt="SHOP++商城" />
+			<a href="/">
+				<img src="/upload/image/logo.gif" alt="OnlineShop商城" />
 			</a>
 		</div>
 	</div>
@@ -433,31 +433,31 @@ $().ready(function() {
 		<div class="topNav clearfix">
 			<ul>
 				<li id="headerLogin" class="headerLogin">
-					<a href="shopxx/login.jhtml">登录</a>|
+					<a href="/login.jhtml">登录</a>|
 				</li>
 				<li id="headerRegister" class="headerRegister">
-					<a href="shopxx/register.jhtml">注册</a>|
+					<a href="/register.jhtml">注册</a>|
 				</li>
 				<li id="headerUsername" class="headerUsername"></li>
 				<li id="headerLogout" class="headerLogout">
-					<a href="shopxx/logout.jhtml">[退出]</a>|
+					<a href="/logout.jhtml">[退出]</a>|
 				</li>
 						<li>
-							<a href="/shopxx/member/index.jhtml">会员中心</a>
+							<a href="/member/index.jhtml">会员中心</a>
 							|
 						</li>
 						<li>
-							<a href="/shopxx/article/list/3.jhtml">购物指南</a>
+							<a href="/article/list/3.jhtml">购物指南</a>
 							|
 						</li>
 						<li>
-							<a href="/shopxx/article/list/7.jhtml">关于我们</a>
+							<a href="/article/list/7.jhtml">关于我们</a>
 							
 						</li>
 			</ul>
 		</div>
 		<div class="cart">
-			<a href="shopxx/cart/list.jhtml">购物车</a>
+			<a href="/cart/list.jhtml">购物车</a>
 		</div>
 			<div class="phone">
 				客服热线:
@@ -467,35 +467,35 @@ $().ready(function() {
 	<div class="span24">
 		<ul class="mainNav">
 					<li>
-						<a href="/shopxx/">首页</a>
+						<a href="/">首页</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/1.jhtml">时尚女装</a>
+						<a href="/product/list/1.jhtml">时尚女装</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/2.jhtml">精品男装</a>
+						<a href="/product/list/2.jhtml">精品男装</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/3.jhtml">精致内衣</a>
+						<a href="/product/list/3.jhtml">精致内衣</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/4.jhtml">服饰配件</a>
+						<a href="/product/list/4.jhtml">服饰配件</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/5.jhtml">时尚女鞋</a>
+						<a href="/product/list/5.jhtml">时尚女鞋</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/6.jhtml">流行男鞋</a>
+						<a href="/product/list/6.jhtml">流行男鞋</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/product/list/9.jhtml">童装童鞋</a>
+						<a href="/product/list/9.jhtml">童装童鞋</a>
 						
 					</li>
 		</ul>
@@ -504,26 +504,26 @@ $().ready(function() {
 		<div class="tagWrap">
 			<ul class="tag">
 						<li class="icon" style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/hot.gif) right no-repeat;">
-							<a href="shopxx/product/list.jhtml?tagIds=1">热销</a>
+							<a href="/product/list.jhtml?tagIds=1">热销</a>
 						</li>
 						<li class="icon" style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/new.gif) right no-repeat;">
-							<a href="shopxx/product/list.jhtml?tagIds=2">最新</a>
+							<a href="/product/list.jhtml?tagIds=2">最新</a>
 						</li>
 			</ul>
 			<div class="hotSearch">
 					热门搜索:
-						<a href="shopxx/product/search.jhtml?keyword=T%E6%81%A4">T恤</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E8%A1%AC%E8%A1%AB">衬衫</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E8%A5%BF%E6%9C%8D">西服</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E8%A5%BF%E8%A3%A4">西裤</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E6%A3%AE%E9%A9%AC">森马</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E4%B8%83%E5%8C%B9%E7%8B%BC">七匹狼</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E6%A2%B5%E5%B8%8C%E8%94%93">梵希蔓</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E6%98%A5%E5%A4%8F%E6%96%B0%E6%AC%BE">春夏新款</a>
-						<a href="shopxx/product/search.jhtml?keyword=%E7%89%9B%E4%BB%94%E8%A3%A4">牛仔裤</a>
+						<a href="/product/search.jhtml?keyword=T%E6%81%A4">T恤</a>
+						<a href="/product/search.jhtml?keyword=%E8%A1%AC%E8%A1%AB">衬衫</a>
+						<a href="/product/search.jhtml?keyword=%E8%A5%BF%E6%9C%8D">西服</a>
+						<a href="/product/search.jhtml?keyword=%E8%A5%BF%E8%A3%A4">西裤</a>
+						<a href="/product/search.jhtml?keyword=%E6%A3%AE%E9%A9%AC">森马</a>
+						<a href="/product/search.jhtml?keyword=%E4%B8%83%E5%8C%B9%E7%8B%BC">七匹狼</a>
+						<a href="/product/search.jhtml?keyword=%E6%A2%B5%E5%B8%8C%E8%94%93">梵希蔓</a>
+						<a href="/product/search.jhtml?keyword=%E6%98%A5%E5%A4%8F%E6%96%B0%E6%AC%BE">春夏新款</a>
+						<a href="/product/search.jhtml?keyword=%E7%89%9B%E4%BB%94%E8%A3%A4">牛仔裤</a>
 			</div>
 			<div class="search">
-				<form id="productSearchForm" action="shopxx/product/search.jhtml" method="get">
+				<form id="productSearchForm" action="/product/search.jhtml" method="get">
 					<input name="keyword" class="keyword" value="商品搜索" maxlength="30" />
 					<button type="submit">搜索</button>
 				</form>
@@ -535,172 +535,172 @@ $().ready(function() {
 			<div class="hotProductCategory">
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/1.jhtml">时尚女装</a>
+								<a href="/product/list/1.jhtml">时尚女装</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/11.jhtml">连衣裙</a>
+										<a href="/product/list/11.jhtml">连衣裙</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/12.jhtml">针织衫</a>
+										<a href="/product/list/12.jhtml">针织衫</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/13.jhtml">短外套</a>
+										<a href="/product/list/13.jhtml">短外套</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/14.jhtml">小西装</a>
+										<a href="/product/list/14.jhtml">小西装</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/2.jhtml">精品男装</a>
+								<a href="/product/list/2.jhtml">精品男装</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/21.jhtml">针织衫</a>
+										<a href="/product/list/21.jhtml">针织衫</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/22.jhtml">POLO衫</a>
+										<a href="/product/list/22.jhtml">POLO衫</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/23.jhtml">休闲裤</a>
+										<a href="/product/list/23.jhtml">休闲裤</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/24.jhtml">牛仔裤</a>
+										<a href="/product/list/24.jhtml">牛仔裤</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/3.jhtml">精致内衣</a>
+								<a href="/product/list/3.jhtml">精致内衣</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/31.jhtml">女式内裤</a>
+										<a href="/product/list/31.jhtml">女式内裤</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/32.jhtml">男式内裤</a>
+										<a href="/product/list/32.jhtml">男式内裤</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/33.jhtml">保暖内衣</a>
+										<a href="/product/list/33.jhtml">保暖内衣</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/34.jhtml">塑身衣</a>
+										<a href="/product/list/34.jhtml">塑身衣</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/4.jhtml">服饰配件</a>
+								<a href="/product/list/4.jhtml">服饰配件</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/41.jhtml">女士腰带</a>
+										<a href="/product/list/41.jhtml">女士腰带</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/42.jhtml">男士皮带</a>
+										<a href="/product/list/42.jhtml">男士皮带</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/43.jhtml">女士围巾</a>
+										<a href="/product/list/43.jhtml">女士围巾</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/44.jhtml">男士围巾</a>
+										<a href="/product/list/44.jhtml">男士围巾</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/5.jhtml">时尚女鞋</a>
+								<a href="/product/list/5.jhtml">时尚女鞋</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/51.jhtml">高帮鞋</a>
+										<a href="/product/list/51.jhtml">高帮鞋</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/52.jhtml">雪地靴</a>
+										<a href="/product/list/52.jhtml">雪地靴</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/53.jhtml">中筒靴</a>
+										<a href="/product/list/53.jhtml">中筒靴</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/54.jhtml">单鞋</a>
+										<a href="/product/list/54.jhtml">单鞋</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/6.jhtml">流行男鞋</a>
+								<a href="/product/list/6.jhtml">流行男鞋</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/59.jhtml">低帮鞋</a>
+										<a href="/product/list/59.jhtml">低帮鞋</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/60.jhtml">高帮鞋</a>
+										<a href="/product/list/60.jhtml">高帮鞋</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/61.jhtml">休闲鞋</a>
+										<a href="/product/list/61.jhtml">休闲鞋</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/62.jhtml">正装鞋</a>
+										<a href="/product/list/62.jhtml">正装鞋</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/7.jhtml">潮流女包</a>
+								<a href="/product/list/7.jhtml">潮流女包</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/63.jhtml">单肩包</a>
+										<a href="/product/list/63.jhtml">单肩包</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/64.jhtml">双肩包</a>
+										<a href="/product/list/64.jhtml">双肩包</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/65.jhtml">手提包</a>
+										<a href="/product/list/65.jhtml">手提包</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/66.jhtml">手拿包</a>
+										<a href="/product/list/66.jhtml">手拿包</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/8.jhtml">精品男包</a>
+								<a href="/product/list/8.jhtml">精品男包</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/67.jhtml">单肩男</a>
+										<a href="/product/list/67.jhtml">单肩男</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/68.jhtml">双肩包</a>
+										<a href="/product/list/68.jhtml">双肩包</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/69.jhtml">手提包</a>
+										<a href="/product/list/69.jhtml">手提包</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/70.jhtml">手拿包</a>
+										<a href="/product/list/70.jhtml">手拿包</a>
 									</dd>
 						</dl>
 						<dl>
 							<dt>
-								<a href="shopxx/product/list/9.jhtml">童装童鞋</a>
+								<a href="/product/list/9.jhtml">童装童鞋</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/71.jhtml">运动鞋</a>
+										<a href="/product/list/71.jhtml">运动鞋</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/72.jhtml">牛仔裤</a>
+										<a href="/product/list/72.jhtml">牛仔裤</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/73.jhtml">套装</a>
+										<a href="/product/list/73.jhtml">套装</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/74.jhtml">裤子</a>
+										<a href="/product/list/74.jhtml">裤子</a>
 									</dd>
 						</dl>
 						<dl class="last">
 							<dt>
-								<a href="shopxx/product/list/10.jhtml">时尚饰品</a>
+								<a href="/product/list/10.jhtml">时尚饰品</a>
 							</dt>
 									<dd>
-										<a href="shopxx/product/list/75.jhtml">项链</a>
+										<a href="/product/list/75.jhtml">项链</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/76.jhtml">手链</a>
+										<a href="/product/list/76.jhtml">手链</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/77.jhtml">戒指</a>
+										<a href="/product/list/77.jhtml">戒指</a>
 									</dd>
 									<dd>
-										<a href="shopxx/product/list/78.jhtml">耳饰</a>
+										<a href="/product/list/78.jhtml">耳饰</a>
 									</dd>
 						</dl>
 			</div>
@@ -719,13 +719,13 @@ $().ready(function() {
 			<div class="path">
 				<ul>
 					<li>
-						<a href="shopxx/">首页</a>
+						<a href="/">首页</a>
 					</li>
 							<li>
-								<a href="shopxx/product/list/2.jhtml">精品男装</a>
+								<a href="/product/list/2.jhtml">精品男装</a>
 							</li>
 					<li>
-						<a href="shopxx/product/list/29.jhtml">风衣</a>
+						<a href="/product/list/29.jhtml">风衣</a>
 					</li>
 				</ul>
 			</div>
@@ -858,9 +858,9 @@ $().ready(function() {
 						<td>
 							<span title="亮面">亮面</span>
 						</td>
-						<th>季节</th>
+						<th>面料分类</th>
 						<td>
-							<span title="春">春</span>
+							<span title="梭织分类">梭织分类</span>
 						</td>
 							</tr>
 				</table>
@@ -958,7 +958,7 @@ $().ready(function() {
 					<div class="title">商品评论</div>
 					<div class="content clearfix">
 							<p>
-								暂无商品评论信息 <a href="shopxx/review/add/165.jhtml" id="addReview">[发表商品评论]</a>
+								暂无商品评论信息 <a href="/review/add/165.jhtml" id="addReview">[发表商品评论]</a>
 							</p>
 					</div>
 				</div>
@@ -966,7 +966,7 @@ $().ready(function() {
 					<div class="title">商品咨询</div>
 					<div class="content">
 								<p>
-									暂无商品咨询信息 <a href="shopxx/consultation/add/165.jhtml" id="addConsultation">[发表商品咨询]</a>
+									暂无商品咨询信息 <a href="/consultation/add/165.jhtml" id="addConsultation">[发表商品咨询]</a>
 								</p>
 					</div>
 				</div>
@@ -996,15 +996,15 @@ $().ready(function() {
 						|
 					</li>
 					<li>
-						<a href="/shopxx/friend_link.jhtml">友情链接</a>
+						<a href="/friend_link.jhtml">友情链接</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/article/list/4.jhtml" target="_blank">支付方式</a>
+						<a href="/article/list/4.jhtml" target="_blank">支付方式</a>
 						|
 					</li>
 					<li>
-						<a href="/shopxx/article/list/5.jhtml" target="_blank">配送方式</a>
+						<a href="/article/list/5.jhtml" target="_blank">配送方式</a>
 						|
 					</li>
 					<li>
@@ -1018,7 +1018,7 @@ $().ready(function() {
 		</ul>
 	</div>
 	<div class="span24">
-		<div class="copyright">Copyright © 2005-2013 SHOP++商城 版权所有</div>
+		<div class="copyright">Copyright © 2005-2013 OnlineShop商城 版权所有</div>
 	</div>
 </div></body>
 </html>

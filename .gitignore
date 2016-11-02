@@ -1,4 +1,40 @@
-.idea/
-.DS_Store
+# Eclipse project files
+.classpath
+.project
+.settings
+/bin/
+
+# Intellij project files
 *.iml
-target/git
+.idea/
+
+# Bower, NPM
+node_modules/
+bower_components/
+
+# Maven
+target/
+
+# System
+*.DS_Store
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files
+#*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Project Releted
+applogs
+logs
+titan-web/target/
+titan-web/test/
+
+var
+
+target/

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,8 +33,8 @@ public class Cart extends BaseEntity {
 	public static final String ID_COOKIE_NAME = "cartId";
 	public static final String KEY_COOKIE_NAME = "cartKey";
 	private String IIIllIlI;
-	private Member IIIllIll;
-	private Set<CartItem> IIIlllII = new HashSet();
+	private Member member;
+	private Set<CartItem> cartItems = new HashSet();
 
 	@Column(name = "cart_key", nullable = false, updatable = false)
 	public String getKey() {
@@ -48,20 +47,20 @@ public class Cart extends BaseEntity {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	public Member getMember() {
-		return this.IIIllIll;
+		return this.member;
 	}
 
 	public void setMember(Member member) {
-		this.IIIllIll = member;
+		this.member = member;
 	}
 
 	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = { javax.persistence.CascadeType.REMOVE })
 	public Set<CartItem> getCartItems() {
-		return this.IIIlllII;
+		return this.cartItems;
 	}
 
 	public void setCartItems(Set<CartItem> cartItems) {
-		this.IIIlllII = cartItems;
+		this.cartItems = cartItems;
 	}
 
 	@Transient

@@ -79,7 +79,10 @@ $().ready(function() {
 		$.ajax({
 			url: "payment_plugin_select.jhtml",
 			type: "POST",
-			data: {sn: "${order.sn}", paymentPluginId: $(this).val()},
+			data: {
+				sn: "${order.sn}",
+				paymentPluginId: $(this).val()
+			},
 			dataType: "json",
 			cache: false,
 			success: function(data) {

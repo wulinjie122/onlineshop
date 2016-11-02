@@ -146,12 +146,12 @@ public class Product
 
     static {
         try {
-            File localFile = new ClassPathResource("/shopxx.xml").getFile();
-            Document localDocument = new SAXReader().read(localFile);
-            Element localElement = (Element) localDocument.selectSingleNode("/shopxx/template[@id='productContent']");
-            IIIllIlI = localElement.attributeValue("staticPath");
-        } catch (Exception localException) {
-            localException.printStackTrace();
+            File file = new ClassPathResource("/shopxx.xml").getFile();
+            Document document = new SAXReader().read(file);
+            Element element = (Element) document.selectSingleNode("/shopxx/template[@id='productContent']");
+            IIIllIlI = element.attributeValue("staticPath");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

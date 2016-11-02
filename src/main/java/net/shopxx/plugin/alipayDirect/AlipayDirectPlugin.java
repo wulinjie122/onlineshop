@@ -53,8 +53,7 @@ public class AlipayDirectPlugin extends PaymentPlugin {
         return Integer.valueOf(21600);
     }
 
-    public Map<String, String> getParameterMap(String sn, BigDecimal amount,
-                                               String description, HttpServletRequest request) {
+    public Map<String, String> getParameterMap(String sn, BigDecimal amount, String description, HttpServletRequest request) {
         return new HashMap();
     }
 
